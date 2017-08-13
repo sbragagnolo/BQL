@@ -5,7 +5,7 @@ scanForTokenX2
 	currentCharacter == $*
 		ifTrue: [ ^ self scan4 ].
 	currentCharacter == $/
-		ifTrue: [ [ self recordMatch: #(77).
+		ifTrue: [ [ self recordMatch: #(78).
 			self step.
 			currentCharacter <= Character tab
 				or: [ (currentCharacter between: Character pageUp and: Character newPage)

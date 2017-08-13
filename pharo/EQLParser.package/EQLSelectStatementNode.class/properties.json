@@ -11,7 +11,8 @@
 		"from",
 		"where",
 		"orderBy",
-		"domain"
+		"domain",
+		"limit"
 	],
 	"name" : "EQLSelectStatementNode",
 	"type" : "normal"

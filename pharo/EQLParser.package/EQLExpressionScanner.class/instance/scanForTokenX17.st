@@ -3,7 +3,7 @@ scanForTokenX17
 	currentCharacter == $[
 		ifTrue: [ ^ self recordAndReportMatch: #(53) ].
 	currentCharacter == $]
-		ifTrue: [ ^ self recordAndReportMatch: #(36) ].
+		ifTrue: [ ^ self recordAndReportMatch: #(37) ].
 	currentCharacter == $^
 		ifTrue:
 			[ ^ self scanForTokenX12 ].
@@ -11,14 +11,14 @@ scanForTokenX17
 		ifTrue:
 			[ ^ self scanForTokenX1 ].
 	currentCharacter == ${
-		ifTrue: [ ^ self recordAndReportMatch: #(63) ].
+		ifTrue: [ ^ self recordAndReportMatch: #(67) ].
 	currentCharacter == $|
 		ifTrue:
 			[ ^ self scanForTokenX6 ].
 	currentCharacter == $}
-		ifTrue: [ ^ self recordAndReportMatch: #(62) ].
+		ifTrue: [ ^ self recordAndReportMatch: #(64) ].
 	currentCharacter == $~
-		ifTrue: [ ^ self recordAndReportMatch: #(59) ].
+		ifTrue: [ ^ self recordAndReportMatch: #(60) ].
 	currentCharacter isDigit
 		ifTrue: [ ^ self scan6 ].
 	(currentCharacter isSeparator

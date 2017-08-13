@@ -8,4 +8,5 @@ reduceActionForSelectStatement1: nodes
 	result domain: (nodes at: 4).
 	result where: (nodes at: 5).
 	result orderBy: (nodes at: 6).
+	result limit: (nodes at: 7).
 	^ result
