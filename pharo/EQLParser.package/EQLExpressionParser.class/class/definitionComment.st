@@ -6,7 +6,7 @@ definitionComment
 <realnumber>: <decimalnumber>? [\.] <decimalnumber> ; #  added to support real numbers (not in the grammar but apear in the contracts)	
 <hexliteral>: hex ( [""] ( [0-9a-fA-F][0-9a-fA-F] )* [""] |  ['] ( [0-9a-fA-F][0-9a-fA-F] )* [']  );
 <booleanliteral> : true | false ;
-<reservedkeywords>:  SELECT | FROM | IN | AT | PORT | WHERE  | ORDER | BY |  IS | AND | OR | NOT | CONTRACTS | TRANSACTIONS | BLOCKS | TYPE | ACCOUNTS | CONTRACT | ACTIVATED-METHODS | STAMP | CREATE | STREAM | DIRECTORY | REPOSITORY  | WEI ;
+<reservedkeywords>:  SELECT | FROM | IN | AT |LIMIT| PORT | WHERE  | ORDER | BY |  IS | AND | OR | NOT | CONTRACTS | TRANSACTIONS | BLOCKS | TYPE | ACCOUNTS | CONTRACT | ACTIVATED-METHODS | STAMP | CREATE | STREAM | DIRECTORY | REPOSITORY  | WEI ;
 <identifier>: [a-zA-Z_$] [a-zA-Z_$0-9]* ;
 <url>: [a-zA-Z_$] [a-zA-Z_$0-9]*[\:]  [0-9]+ ;
 <nestedids> : <identifier> ( [\.]  <identifier> )+ ;
@@ -49,7 +49,7 @@ definitionComment
 RootQuery : ( Clause 'clause')* {{}}	;
 Clause : SelectStatement | CreateStatement ;
 
-SelectStatement: ""select"" Expression 'binding' FromStatement 'from' (DomainStatement 'domain')?   WhereStatement  'where' OrderByStatement 'orderBy'{{}};
+SelectStatement: ""select"" Expression 'binding' FromStatement 'from' (DomainStatement 'domain')?  ( WhereStatement  'where')? (OrderByStatement 'orderBy')? (LimitStatement 'limit')? {{}};
 CreateStatement: ""create"" ""stream"" <identifier> 'name' ""{"" SelectStatement 'selection' ""}"" {{}};
 
 DomainStatement: ""domain"" <url> 'url' {{}};
@@ -59,6 +59,9 @@ FromStatement: ""from"" <identifier> 'binding' ""in"" <identifier> 'stream_name'
 WhereStatement: ""where""  Expression 'expression' {{}};
 
 OrderByStatement: ""order"" ""by"" Expression 'expression' {{}};
+
+LimitStatement: ""limit"" <decimalnumber> 'amount' {{}};
+
 
 BinaryExpression :
 	 Expression 'left_exp' ""**"" 'operation' Expression 'right_exp' {{}}

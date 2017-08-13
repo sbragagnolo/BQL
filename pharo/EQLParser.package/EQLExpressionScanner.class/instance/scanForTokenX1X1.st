@@ -1,13 +1,13 @@
 generated
 scanForTokenX1X1
-	self recordMatch: #(73).
+	self recordMatch: #(74).
 	self step.
 	currentCharacter == $.
 		ifTrue: [ ^ self scan2 ].
 	currentCharacter == $:
 		ifTrue: [ ^ self scan3 ].
 	currentCharacter == $x
-		ifTrue: [ self recordMatch: #(73).
+		ifTrue: [ self recordMatch: #(74).
 			self step.
 			currentCharacter == $"
 				ifTrue: [ ^ self scan7 ].

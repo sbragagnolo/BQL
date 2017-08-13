@@ -1,3 +1,3 @@
 generated
 nodeVariables
-	^ #(#binding #from #domain #where #orderBy)
+	^ #(#binding #from #domain #where #orderBy #limit)

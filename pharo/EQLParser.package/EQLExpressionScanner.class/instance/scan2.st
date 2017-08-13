@@ -4,7 +4,7 @@ scan2
 	(currentCharacter == $$
 		or: [ (currentCharacter between: $A and: $Z)
 				or: [ currentCharacter == $_ or: [ currentCharacter between: $a and: $z ] ] ])
-		ifTrue: [ [ self recordMatch: #(75).
+		ifTrue: [ [ self recordMatch: #(76).
 			self step.
 			currentCharacter == $.
 				ifTrue: [ ^ self scan2 ].
