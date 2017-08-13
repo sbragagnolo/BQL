@@ -8,4 +8,4 @@ baseline: spec
 				with: [ spec
 						repository: 'github://ThierryGoubier/SmaCC';
 						loads: 'SmaCC-GLR-Runtime' ].
-			spec package: 'EQLParser' with: [ spec requires: 'SmaCC-GLR-Runtime' ] ]
+			spec package: 'EQLParser' with: [ spec requires: 'SmaCC' ] ]
