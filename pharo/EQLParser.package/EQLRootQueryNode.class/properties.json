@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "SmaCCParseNode",
+	"category" : "EQLParser-generated",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"clauses"
+	],
+	"name" : "EQLRootQueryNode",
+	"type" : "normal"
+}

@@ -1,0 +1,3 @@
+generated
+visitUnaryPrefixExpression: anUnaryPrefixExpression
+	^ self visitRootQuery: anUnaryPrefixExpression

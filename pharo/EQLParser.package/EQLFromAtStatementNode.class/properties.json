@@ -1,0 +1,20 @@
+{
+	"commentStamp" : "",
+	"super" : "EQLRootQueryNode",
+	"category" : "EQLParser-generated",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"fromToken",
+		"binding",
+		"inToken",
+		"stream_name",
+		"atToken",
+		"host",
+		"port",
+		"portToken"
+	],
+	"name" : "EQLFromAtStatementNode",
+	"type" : "normal"
+}

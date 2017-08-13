@@ -1,0 +1,10 @@
+generated-reduction actions
+reduceActionForTupleExpression1: nodes
+	| result |
+	result := EQLTupleExpressionNode new.
+	result leftBracketToken: (nodes at: 1).
+	result exp: ((nodes at: 2) at: 1).
+	result addTokens: ((nodes at: 2) at: 2) to: result commaTokens.
+	result addNodes: ((nodes at: 2) at: 3) to: result array_access_exps.
+	result rightBracketToken: (nodes at: 3).
+	^ result

@@ -1,0 +1,18 @@
+{
+	"commentStamp" : "",
+	"super" : "EQLRootQueryNode",
+	"category" : "EQLParser-generated",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"name",
+		"createToken",
+		"streamToken",
+		"selection",
+		"leftBraceToken",
+		"rightBraceToken"
+	],
+	"name" : "EQLCreateStatementNode",
+	"type" : "normal"
+}

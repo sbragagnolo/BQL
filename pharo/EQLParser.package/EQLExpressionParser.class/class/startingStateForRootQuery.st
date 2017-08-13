@@ -1,0 +1,3 @@
+generated
+startingStateForRootQuery
+	^ 1

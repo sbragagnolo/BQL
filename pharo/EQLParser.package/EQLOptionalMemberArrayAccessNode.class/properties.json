@@ -1,0 +1,18 @@
+{
+	"commentStamp" : "",
+	"super" : "EQLRootQueryNode",
+	"category" : "EQLParser-generated",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"periodTokens",
+		"id_list_member_accesses",
+		"id_member_accesses",
+		"leftBracketTokens",
+		"array_access_exps",
+		"rightBracketTokens"
+	],
+	"name" : "EQLOptionalMemberArrayAccessNode",
+	"type" : "normal"
+}
