@@ -1,0 +1,3 @@
+generated
+dateToken
+	^ dateToken

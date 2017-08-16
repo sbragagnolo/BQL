@@ -1,8 +1,14 @@
 generated
 scan3
+	[ self recordMatch: #(76).
 	self step.
-	currentCharacter isDigit
-		ifTrue: [ [ self recordMatch: #(75).
-			self step.
-			currentCharacter isDigit ] whileTrue ].
+	currentCharacter == $.
+		ifTrue: [ ^ self scan4 ].
+	currentCharacter == $:
+		ifTrue: [ ^ self scan5 ].
+	currentCharacter == $$
+		or: [ (currentCharacter between: $0 and: $9)
+				or: [ (currentCharacter between: $A and: $Z)
+						or: [ currentCharacter == $_ or: [ currentCharacter between: $a and: $z ] ] ] ] ]
+		whileTrue.
 	^ self reportLastMatch

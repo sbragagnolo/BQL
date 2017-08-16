@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "EQLRootQueryNode",
+	"category" : "EQLParser",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"date",
+		"dateToken"
+	],
+	"name" : "EQLStringDateNode",
+	"type" : "normal"
+}

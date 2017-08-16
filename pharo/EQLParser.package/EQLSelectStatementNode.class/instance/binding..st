@@ -1,7 +1,7 @@
 generated
-binding: anEQLRootQueryNode
+binding: anEQLExpressionListNode
 	self binding notNil
 		ifTrue: [ self binding parent: nil ].
-	binding := anEQLRootQueryNode.
+	binding := anEQLExpressionListNode.
 	self binding notNil
 		ifTrue: [ self binding parent: self ]

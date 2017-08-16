@@ -1,9 +1,9 @@
 generated
 scanForTokenX17
 	currentCharacter == $[
-		ifTrue: [ ^ self recordAndReportMatch: #(53) ].
+		ifTrue: [ ^ self recordAndReportMatch: #(62) ].
 	currentCharacter == $]
-		ifTrue: [ ^ self recordAndReportMatch: #(37) ].
+		ifTrue: [ ^ self recordAndReportMatch: #(38) ].
 	currentCharacter == $^
 		ifTrue:
 			[ ^ self scanForTokenX12 ].
@@ -11,20 +11,20 @@ scanForTokenX17
 		ifTrue:
 			[ ^ self scanForTokenX1 ].
 	currentCharacter == ${
-		ifTrue: [ ^ self recordAndReportMatch: #(67) ].
+		ifTrue: [ ^ self recordAndReportMatch: #(68) ].
 	currentCharacter == $|
 		ifTrue:
 			[ ^ self scanForTokenX6 ].
 	currentCharacter == $}
-		ifTrue: [ ^ self recordAndReportMatch: #(64) ].
+		ifTrue: [ ^ self recordAndReportMatch: #(69) ].
 	currentCharacter == $~
-		ifTrue: [ ^ self recordAndReportMatch: #(60) ].
+		ifTrue: [ ^ self recordAndReportMatch: #(57) ].
 	currentCharacter isDigit
-		ifTrue: [ ^ self scan6 ].
+		ifTrue: [ ^ self scan10 ].
 	(currentCharacter isSeparator
 		or: [ currentCharacter == Character pageUp ])
 		ifTrue:
 			[ ^ self scanForTokenX11 ].
 	(currentCharacter isSafeForHTTP or: [ currentCharacter == $$ ])
-		ifTrue: [ ^ self scan1 ].
+		ifTrue: [ ^ self scan3 ].
 	^ self reportLastMatch

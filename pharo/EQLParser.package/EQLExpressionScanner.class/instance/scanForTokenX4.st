@@ -1,12 +1,12 @@
 generated
 scanForTokenX4
-	self recordMatch: #(1).
+	self recordMatch: #(4).
 	self step.
 	currentCharacter == $=
-		ifTrue: [ ^ self recordAndReportMatch: #(2) ].
+		ifTrue: [ ^ self recordAndReportMatch: #(1) ].
 	currentCharacter == $>
-		ifTrue: [ self recordMatch: #(15).
+		ifTrue: [ self recordMatch: #(14).
 			self step.
 			currentCharacter == $=
-				ifTrue: [ ^ self recordAndReportMatch: #(25) ] ].
+				ifTrue: [ ^ self recordAndReportMatch: #(26) ] ].
 	^ self reportLastMatch

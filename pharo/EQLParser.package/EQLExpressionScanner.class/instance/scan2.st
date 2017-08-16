@@ -1,16 +1,23 @@
 generated
 scan2
-	self step.
-	(currentCharacter == $$
-		or: [ (currentCharacter between: $A and: $Z)
-				or: [ currentCharacter == $_ or: [ currentCharacter between: $a and: $z ] ] ])
-		ifTrue: [ [ self recordMatch: #(76).
+	[ self step.
+	currentCharacter == $"
+		ifTrue: [ self recordMatch: #(80).
 			self step.
-			currentCharacter == $.
+			currentCharacter == $"
+				ifTrue: [ ^ self recordAndReportMatch: #(80) ].
+			(currentCharacter == Character space or: [ currentCharacter == $\ ])
 				ifTrue: [ ^ self scan2 ].
-			currentCharacter == $$
-				or: [ (currentCharacter between: $0 and: $9)
-						or: [ (currentCharacter between: $A and: $Z)
-								or: [ currentCharacter == $_ or: [ currentCharacter between: $a and: $z ] ] ] ] ]
-				whileTrue ].
-	^ self reportLastMatch
+			(currentCharacter <= Character tab
+				or: [ (currentCharacter between: Character pageUp and: Character newPage)
+						or: [ (currentCharacter
+								between: (Character value: 14)
+								and: Character arrowDown)
+								or: [ currentCharacter == $!
+										or: [ (currentCharacter between: $# and: $[)
+												or: [ currentCharacter >= $] ] ] ] ] ])
+				ifTrue: [ ^ self scan1 ].
+			^ self reportLastMatch ].
+	currentCharacter == Character space or: [ currentCharacter == $\ ] ]
+		whileTrue.
+	^ self scan1

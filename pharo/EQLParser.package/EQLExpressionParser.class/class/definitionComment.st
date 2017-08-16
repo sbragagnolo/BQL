@@ -11,6 +11,9 @@ definitionComment
 <url>: [a-zA-Z_$] [a-zA-Z_$0-9]*[\:]  [0-9]+ ;
 <nestedids> : <identifier> ( [\.]  <identifier> )+ ;
 <whitespace>: \s+ ;
+<stringLiteral>: ( [""] ( [^""\r\n]  | ([ \\ ] . ) )* [""] ) 
+               | ( ['] ( [^'\r\n]  | ([ \\ ] . ) )* ['] ) ;
+
 
 <comment>
 	: \/\/ [^\r\n]* 
@@ -49,7 +52,7 @@ definitionComment
 RootQuery : ( Clause 'clause')* {{}}	;
 Clause : SelectStatement | CreateStatement ;
 
-SelectStatement: ""select"" Expression 'binding' FromStatement 'from' (DomainStatement 'domain')?  ( WhereStatement  'where')? (OrderByStatement 'orderBy')? (LimitStatement 'limit')? {{}};
+SelectStatement: ""select"" ExpressionList 'binding' FromStatement 'from' (DomainStatement 'domain')?  ( WhereStatement  'where')? (OrderByStatement 'orderBy')? (LimitStatement 'limit')? {{}};
 CreateStatement: ""create"" ""buffer"" <identifier> 'name' ""{"" SelectStatement 'selection' ""}"" {{}};
 
 DomainStatement: ""domain"" <url> 'url' {{}};
@@ -68,6 +71,16 @@ LimitStatement: ""limit"" <decimalnumber> 'amount' {{}};
 
 
 
+### Dates !
+
+	StringDate: 
+		<stringLiteral> 'date' ""Date""{{}};
+	NowDate: 
+		""Now"" {{}};
+	Date: 
+		StringDate
+	      | NowDate;
+		
 
 ### Booleans! 
 	
@@ -91,7 +104,7 @@ LimitStatement: ""limit"" <decimalnumber> 'amount' {{}};
 ### Arithmetics! 
 
 	ArithmeticallyOperable: 
-		(ArithmeticOperation | TermExpression | ParenthesisArithmeticExpression);
+		(ArithmeticOperation | TermExpression | ParenthesisArithmeticExpression | Date  );
 
 	ArithmeticOperation: 
 		NegativeOperation 
@@ -121,7 +134,7 @@ LimitStatement: ""limit"" <decimalnumber> 'amount' {{}};
 
 
 ComparisionOperable: 
-	(ArithmeticOperation | TermExpression | ParenthesisArithmeticExpression); 
+	(ArithmeticOperation | TermExpression | ParenthesisArithmeticExpression | Date ); 
 
 CompareOperation: 
 	(LesserThanOperation | LesserEqualsThanOperation | GreaterThanOperation| GreaterEqualsThanOperation)
@@ -160,6 +173,7 @@ Expression :
 	| CompareOperation
 	| BooleanOperation
 	| TupleExpression
+	| Date
 	| TermExpression 'term' {{}}
 	;
 
@@ -174,6 +188,7 @@ TermExpression
 	| ArrayAccess
 	| FunctionCall 
 	| <nestedids>
+	| <stringLiteral>
 	;
 	
 
