@@ -6,7 +6,24 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"factor"
+		"identifierToken",
+		"booleanliteralToken",
+		"number",
+		"unit",
+		"hexliteralToken",
+		"stringLiteralToken",
+		"property",
+		"periodToken",
+		"member",
+		"leftBracketToken",
+		"access_expression",
+		"rightBracketToken",
+		"function_name",
+		"opt_access",
+		"leftParenToken",
+		"arguments",
+		"rightParenToken",
+		"nestedidsToken"
 	],
 	"name" : "EQLTermExpressionNode",
 	"type" : "normal"

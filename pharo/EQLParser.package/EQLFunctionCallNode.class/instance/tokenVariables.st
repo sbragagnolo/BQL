@@ -1,3 +1,3 @@
 generated
 tokenVariables
-	^ #(#leftParenToken #rightParenToken)
+	^ #(#function_name #leftParenToken #rightParenToken)

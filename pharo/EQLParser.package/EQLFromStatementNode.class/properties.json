@@ -7,9 +7,7 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"fromToken",
-		"binding",
-		"inToken",
-		"stream_name"
+		"sources"
 	],
 	"name" : "EQLFromStatementNode",
 	"type" : "normal"

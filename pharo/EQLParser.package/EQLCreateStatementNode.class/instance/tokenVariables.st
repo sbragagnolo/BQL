@@ -1,3 +1,3 @@
 generated
 tokenVariables
-	^ #(#createToken #streamToken #name #leftBraceToken #rightBraceToken)
+	^ #(#createToken #bufferToken #name #leftBraceToken #rightBraceToken)

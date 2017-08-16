@@ -8,10 +8,10 @@
 	"instvars" : [
 		"name",
 		"createToken",
-		"streamToken",
 		"selection",
 		"leftBraceToken",
-		"rightBraceToken"
+		"rightBraceToken",
+		"bufferToken"
 	],
 	"name" : "EQLCreateStatementNode",
 	"type" : "normal"

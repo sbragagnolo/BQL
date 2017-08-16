@@ -1,0 +1,3 @@
+generated
+visitParenthesisBooleanExpression: aParenthesisBooleanExpression
+	^ self visitRootQuery: aParenthesisBooleanExpression

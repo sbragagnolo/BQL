@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "EQLRootQueryNode",
+	"category" : "EQLParser",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"leftParenToken",
+		"exp",
+		"rightParenToken"
+	],
+	"name" : "EQLParenthesisArithmeticExpressionNode",
+	"type" : "normal"
+}
