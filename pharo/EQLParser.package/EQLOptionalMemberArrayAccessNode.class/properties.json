@@ -8,10 +8,10 @@
 	"instvars" : [
 		"periodTokens",
 		"id_list_member_accesses",
-		"id_member_accesses",
 		"leftBracketTokens",
 		"array_access_exps",
-		"rightBracketTokens"
+		"rightBracketTokens",
+		"members"
 	],
 	"name" : "EQLOptionalMemberArrayAccessNode",
 	"type" : "normal"

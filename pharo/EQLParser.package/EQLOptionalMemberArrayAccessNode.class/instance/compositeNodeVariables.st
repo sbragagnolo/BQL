@@ -1,3 +1,3 @@
 generated
 compositeNodeVariables
-	^ #(#array_access_exps #clauses)
+	^ #(#id_list_member_accesses #array_access_exps #clauses)

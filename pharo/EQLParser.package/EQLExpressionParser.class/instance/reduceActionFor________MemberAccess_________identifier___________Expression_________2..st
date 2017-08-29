@@ -1,5 +1,5 @@
 generated-reduction actions
-reduceActionFor_________nestedids__________identifier___________Expression_________2: nodes
+reduceActionFor________MemberAccess_________identifier___________Expression_________2: nodes
 	| result |
 	result := nodes at: 1.
 	self add: ((nodes at: 2) at: 1) to: (result at: 1).

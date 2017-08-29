@@ -1,5 +1,5 @@
 generated-reduction actions
-reduceActionFor_________nestedids__________identifier___________Expression________2: nodes
+reduceActionFor________MemberAccess_________identifier___________Expression________2: nodes
 	| result |
 	result := Array new: 6.
 	result at: 1 put: ((nodes at: 1) at: 1).

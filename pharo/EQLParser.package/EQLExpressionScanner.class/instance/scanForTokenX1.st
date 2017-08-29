@@ -1,14 +1,37 @@
 generated
 scanForTokenX1
-	self recordMatch: #(76).
+	self recordMatch: #(66).
 	self step.
-	currentCharacter == $.
-		ifTrue: [ ^ self scan4 ].
 	currentCharacter == $:
-		ifTrue: [ ^ self scan5 ].
+		ifTrue: [ ^ self scan4 ].
 	currentCharacter == $e
-		ifTrue:
-			[ ^ self scanForTokenX1X1 ].
+		ifTrue: [ self recordMatch: #(66).
+			self step.
+			currentCharacter == $:
+				ifTrue: [ ^ self scan4 ].
+			currentCharacter == $x
+				ifTrue: [ self recordMatch: #(66).
+					self step.
+					currentCharacter == $"
+						ifTrue: [ ^ self scan10 ].
+					currentCharacter == $'
+						ifTrue: [ ^ self scan11 ].
+					currentCharacter == $:
+						ifTrue: [ ^ self scan4 ].
+					(currentCharacter == $$
+						or: [ (currentCharacter between: $0 and: $9)
+								or: [ (currentCharacter between: $A and: $Z)
+										or: [ currentCharacter == $_ or: [ currentCharacter between: $a and: $z ] ] ] ])
+						ifTrue: [ ^ self scan3 ].
+					^ self reportLastMatch ].
+			(currentCharacter == $$
+				or: [ (currentCharacter between: $0 and: $9)
+						or: [ (currentCharacter between: $A and: $Z)
+								or: [ currentCharacter == $_
+										or: [ (currentCharacter between: $a and: $w)
+												or: [ currentCharacter between: $y and: $z ] ] ] ] ])
+				ifTrue: [ ^ self scan3 ].
+			^ self reportLastMatch ].
 	(currentCharacter == $$
 		or: [ (currentCharacter between: $0 and: $9)
 				or: [ (currentCharacter between: $A and: $Z)
