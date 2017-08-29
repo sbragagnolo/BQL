@@ -1,3 +1,3 @@
 generated
 tokenVariables
-	^ #(#property #periodToken #member)
+	^ #(#property)

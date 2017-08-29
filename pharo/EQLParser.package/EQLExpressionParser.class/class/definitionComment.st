@@ -9,7 +9,6 @@ definitionComment
 <reservedkeywords>:  SELECT | FROM | IN | AT |LIMIT| PORT | WHERE  | ORDER | BY |  IS | AND | OR | NOT | CONTRACTS | TRANSACTIONS | BLOCKS | TYPE | ACCOUNTS | CONTRACT | ACTIVATED-METHODS | STAMP | CREATE | BUFFER | DIRECTORY | REPOSITORY  | WEI ;
 <identifier>: [a-zA-Z_$] [a-zA-Z_$0-9]* ;
 <url>: [a-zA-Z_$] [a-zA-Z_$0-9]*[\:]  [0-9]+ ;
-<nestedids> : <identifier> ( [\.]  <identifier> )+ ;
 <whitespace>: \s+ ;
 <stringLiteral>: ( [""] ( [^""\r\n]  | ([ \\ ] . ) )* [""] ) 
                | ( ['] ( [^'\r\n]  | ([ \\ ] . ) )* ['] ) ;
@@ -28,7 +27,6 @@ definitionComment
 %left "")""  ;
 #expression operators -- lowest precedence are first.
 %left "","";
-%right ""="" ""|="" ""^="" ""&="" ""<<="" "">>="" ""+="" ""-="" ""*="" ""/="" ""%="";
 %right "":"";
 %left ""?"";
 %left ""||"";
@@ -70,7 +68,6 @@ LimitStatement: ""limit"" <decimalnumber> 'amount' {{}};
 
 
 
-
 ### Dates !
 
 	StringDate: 
@@ -104,7 +101,7 @@ LimitStatement: ""limit"" <decimalnumber> 'amount' {{}};
 ### Arithmetics! 
 
 	ArithmeticallyOperable: 
-		(ArithmeticOperation | TermExpression | ParenthesisArithmeticExpression | Date  );
+		(ArithmeticOperation | TermExpression | ParenthesisArithmeticExpression | Date | MemberAccess );
 
 	ArithmeticOperation: 
 		NegativeOperation 
@@ -134,7 +131,7 @@ LimitStatement: ""limit"" <decimalnumber> 'amount' {{}};
 
 
 ComparisionOperable: 
-	(ArithmeticOperation | TermExpression | ParenthesisArithmeticExpression | Date ); 
+	(ArithmeticOperation | TermExpression | ParenthesisArithmeticExpression | Date | MemberAccess ); 
 
 CompareOperation: 
 	(LesserThanOperation | LesserEqualsThanOperation | GreaterThanOperation| GreaterEqualsThanOperation)
@@ -187,18 +184,17 @@ TermExpression
 	| MemberAccess 
 	| ArrayAccess
 	| FunctionCall 
-	| <nestedids>
 	| <stringLiteral>
 	;
 	
 
 
-MemberAccess: <identifier> 'property'  ""."" <identifier> 'member' {{}}; 
+MemberAccess: <identifier> 'property'  (""."" <identifier> 'member')+ {{}}; 
 ArrayAccess: <identifier> 'property'  ""["" Expression 'access_expression' ""]"" {{}};
 	
 # New Rule to allow member access, the optionality is to allow simple expressions
 OptionalMemberArrayAccess
-	: ( ( ""."" <nestedids> 'id_list_member_access' ) | (""."" <identifier> 'id_member_access') | ( ""["" (Expression 'array_access_exp' )? ""]"" ) )* {{}}	
+	: ( ( ""."" MemberAccess 'id_list_member_access' ) | (""."" <identifier> 'id_member_access') | ( ""["" (Expression 'array_access_exp' )? ""]"" ) )* {{}}	
 	;
 OptionalFunctionCall
 	: ( ""("" FunctionCallArguments 'func_args' "")"" ) {{}}

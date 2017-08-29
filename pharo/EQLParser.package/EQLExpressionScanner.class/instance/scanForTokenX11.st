@@ -1,7 +1,7 @@
 generated
 scanForTokenX11
-	[ self recordMatch: #(79).
+	self recordMatch: #(1).
 	self step.
-	currentCharacter isSeparator
-		or: [ currentCharacter == Character pageUp ] ] whileTrue.
+	currentCharacter == $*
+		ifTrue: [ ^ self recordAndReportMatch: #(14) ].
 	^ self reportLastMatch
