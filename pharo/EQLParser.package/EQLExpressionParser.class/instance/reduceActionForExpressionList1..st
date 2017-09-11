@@ -2,7 +2,7 @@ generated-reduction actions
 reduceActionForExpressionList1: nodes
 	| result |
 	result := EQLExpressionListNode new.
-	result addNode: (nodes at: 1) to: result exps.
+	result addObject: (nodes at: 1) to: result exps.
 	result addTokens: ((nodes at: 2) at: 1) to: result commaTokens.
-	result addNodes: ((nodes at: 2) at: 2) to: result exps.
+	result addObjects: ((nodes at: 2) at: 2) to: result exps.
 	^ result

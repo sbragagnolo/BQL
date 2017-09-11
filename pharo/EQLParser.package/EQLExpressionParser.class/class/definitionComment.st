@@ -13,10 +13,10 @@ definitionComment
 <stringLiteral>: ( [""] ( [^""\r\n]  | ([ \\ ] . ) )* [""] ) 
                | ( ['] ( [^'\r\n]  | ([ \\ ] . ) )* ['] ) ;
 
-
 <comment>
 	: \/\/ [^\r\n]* 
 	| /\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/
+	| -- [^\r\n]* 
  	;
 
 ### Directives 	
@@ -28,15 +28,10 @@ definitionComment
 #expression operators -- lowest precedence are first.
 %left "","";
 %right "":"";
-%left ""?"";
-%left ""||"";
-%left ""&&"";
-%left ""=="" ""!="";
+%left ""||"" ""or"";
+%left ""&&"" ""and"";
+%left ""=="" ""!="" ""="" ""<>"";
 %left ""<"" ""<="" "">"" "">="";
-%left ""|"";
-%left ""^"";
-%left ""&"";
-%left ""<<"" "">>"";
 %left ""+"" ""-"";
 %left ""*"" ""/"" ""%"";
 %right ""**"";
@@ -67,9 +62,7 @@ OrderByStatement: ""order"" ""by"" Expression 'expression' {{}};
 LimitStatement: ""limit"" <decimalnumber> 'amount' {{}};
 
 
-
 ### Dates !
-
 	StringDate: 
 		<stringLiteral> 'date' ""Date""{{}};
 	NowDate: 
@@ -80,7 +73,6 @@ LimitStatement: ""limit"" <decimalnumber> 'amount' {{}};
 		
 
 ### Booleans! 
-	
 	BooleanOperable: 
 		(BooleanOperation | CompareOperation | TermExpression | ParenthesisBooleanExpression | ParenthesisCompareExpression);
 
@@ -90,48 +82,41 @@ LimitStatement: ""limit"" <decimalnumber> 'amount' {{}};
 		| AndOperation  ;
 
 	AndOperation:
-		BooleanOperable 'left_exp' (""&&""|""and"")  BooleanOperable 'right_exp' {{}};
+		BooleanOperable 'left_exp' (""&&""|""and"") 'operator'  BooleanOperable 'right_exp' {{}};
 	OrOperation:
-		 BooleanOperable 'left_exp' (""||""|""or"") BooleanOperable 'right_exp' {{}};
+		 BooleanOperable 'left_exp' (""||""|""or"") 'operator' BooleanOperable 'right_exp' {{}};
 	NotOperation:	
-		 (""!"" | ""~"" )  BooleanOperable 'exp' {{}};
-
+		 (""!"" | ""~"" ) 'operator' BooleanOperable 'exp' {{}};
 
 
 ### Arithmetics! 
-
 	ArithmeticallyOperable: 
-		(ArithmeticOperation | TermExpression | ParenthesisArithmeticExpression | Date | MemberAccess );
+		ArithmeticOperation | TermExpression | ParenthesisArithmeticExpression | Date ;
 
 	ArithmeticOperation: 
 		NegativeOperation 
 		| PowerOperation 
-		| (MultiplyOperation| DivideOperation | ModuleOperation)
-		| (SumOperation | SubstractOperation );
-
-
+		| MultiplyOperation| DivideOperation | ModuleOperation
+		| SumOperation | SubstractOperation ;
 
 	NegativeOperation: 
-		""-""  ArithmeticallyOperable 'exp' {{}};
+		""-"" 'operator'  ArithmeticallyOperable 'exp' {{}};
 	PowerOperation: 
-		ArithmeticallyOperable 'left_exp' ""**"" ArithmeticallyOperable 'right_exp' {{}};
+		ArithmeticallyOperable 'left_exp' ""**"" 'operator' ArithmeticallyOperable 'right_exp' {{}};
 	MultiplyOperation: 
-		ArithmeticallyOperable 'left_exp' ""*""   ArithmeticallyOperable 'right_exp' {{}};
+		ArithmeticallyOperable 'left_exp' ""*""   'operator' ArithmeticallyOperable 'right_exp' {{}};
 	DivideOperation: 
-		ArithmeticallyOperable 'left_exp'  ""/"" ArithmeticallyOperable 'right_exp' {{}};
+		ArithmeticallyOperable 'left_exp'  ""/""  'operator' ArithmeticallyOperable 'right_exp' {{}};
 	ModuleOperation: 
-		ArithmeticallyOperable 'left_exp'  ""%""  ArithmeticallyOperable 'right_exp' {{}};
+		ArithmeticallyOperable 'left_exp'  ""%""  'operator' ArithmeticallyOperable 'right_exp' {{}};
 	SumOperation: 
-		ArithmeticallyOperable 'left_exp'  ""+""  ArithmeticallyOperable 'right_exp' {{}};
+		ArithmeticallyOperable 'left_exp'  ""+""  'operator' ArithmeticallyOperable 'right_exp' {{}};
 	SubstractOperation: 
-		ArithmeticallyOperable 'left_exp'  ""-"" ArithmeticallyOperable 'right_exp' {{}};
-
+		ArithmeticallyOperable 'left_exp'  ""-""  'operator' ArithmeticallyOperable 'right_exp' {{}};
 
 ### Comparisions!
-
-
 ComparisionOperable: 
-	(ArithmeticOperation | TermExpression | ParenthesisArithmeticExpression | Date | MemberAccess ); 
+	(ArithmeticOperation | TermExpression | ParenthesisArithmeticExpression | Date ); 
 
 CompareOperation: 
 	(LesserThanOperation | LesserEqualsThanOperation | GreaterThanOperation| GreaterEqualsThanOperation)
@@ -139,29 +124,23 @@ CompareOperation:
 
 
 LesserThanOperation: 
-	ComparisionOperable 'left_exp' ""<""  ComparisionOperable 'right_exp' {{}};
+	ComparisionOperable 'left_exp' ""<""  'operator' ComparisionOperable 'right_exp' {{}};
 LesserEqualsThanOperation: 
-	ComparisionOperable 'left_exp' ""<=""   ComparisionOperable 'right_exp' {{}};
+	ComparisionOperable 'left_exp' ""<="" 'operator'   ComparisionOperable 'right_exp' {{}};
 GreaterThanOperation: 
-	ComparisionOperable 'left_exp' "">""  ComparisionOperable 'right_exp' {{}};
+	ComparisionOperable 'left_exp' "">"" 'operator'  ComparisionOperable 'right_exp' {{}};
 GreaterEqualsThanOperation: 
-	ComparisionOperable 'left_exp' "">=""  ComparisionOperable 'right_exp' {{}};
+	ComparisionOperable 'left_exp' "">="" 'operator'  ComparisionOperable 'right_exp' {{}};
 EqualsToOperation: 
-	ComparisionOperable 'left_exp' ""==""  ComparisionOperable 'right_exp' {{}};
+	ComparisionOperable 'left_exp' (""=="" | ""="") 'operator'  ComparisionOperable 'right_exp' {{}};
 DifferentThanOperation: 
-	ComparisionOperable 'left_exp' ""!=""  ComparisionOperable 'right_exp' {{}};
+	ComparisionOperable 'left_exp' (""!="" | ""<>"") 'operator'  ComparisionOperable 'right_exp' {{}};
 LikeOperation: 
-	ComparisionOperable 'left_exp' ""like""  ComparisionOperable 'right_exp' {{}};
-AssignmentOperation: 
-	ComparisionOperable 'left_exp' (""="")  ComparisionOperable 'right_exp' {{}} ;
-
-
-
+	ComparisionOperable 'left_exp' ""like""  'operator' ComparisionOperable 'right_exp' {{}};
 
 ParenthesisArithmeticExpression: ""("" ArithmeticOperation 'exp' "")""  {{}};
 ParenthesisBooleanExpression: ""("" BooleanOperation 'exp' "")""  {{}};
 ParenthesisCompareExpression: ""("" CompareOperation 'exp' "")""  {{}};
-
 
 ParenthesisExpression: ""("" Expression 'exp' "")""  {{}};
 Expression :  
@@ -171,34 +150,19 @@ Expression :
 	| BooleanOperation
 	| TupleExpression
 	| Date
-	| TermExpression 'term' {{}}
+	| TermExpression 
 	;
 
-
 TermExpression
-	:  <identifier>
+	: <identifier>
+	| <identifier> 'property'  ( ""."" <identifier> 'member' |  ""["" Expression 'access_expression' ""]"" ) +  {{MemberOrArrayAccess}}
+	| <identifier> 'property'  ( ""."" <identifier> 'member' |  ""["" Expression 'access_expression' ""]"" ) *  ""("" FunctionCallArguments 'arguments' "")"" {{FunctionCall}}
 	| <booleanliteral>
 	| NumberLiteral 
 	| <hexliteral>
 	| <stringLiteral>
-	| MemberAccess 
-	| ArrayAccess
-	| FunctionCall 
-	| <stringLiteral>
 	;
-	
 
-
-MemberAccess: <identifier> 'property'  (""."" <identifier> 'member')+ {{}}; 
-ArrayAccess: <identifier> 'property'  ""["" Expression 'access_expression' ""]"" {{}};
-	
-# New Rule to allow member access, the optionality is to allow simple expressions
-OptionalMemberArrayAccess
-	: ( ( ""."" MemberAccess 'id_list_member_access' ) | (""."" <identifier> 'id_member_access') | ( ""["" (Expression 'array_access_exp' )? ""]"" ) )* {{}}	
-	;
-OptionalFunctionCall
-	: ( ""("" FunctionCallArguments 'func_args' "")"" ) {{}}
-	;
 NumberLiteral 
 	: ( <realnumber> | <hexnumber> | <decimalnumber> ) 'number' (NumberUnit 'unit')? {{}}
 	;
@@ -214,19 +178,12 @@ NumberUnit
 	| ""weeks"" 
 	| ""years""
 	;
-	
 TupleExpression 
 	: ""["" ( Expression 'exp' ( "","" (Expression 'exp')?  )*  )? ""]"" {{}}	
  	| ""("" ( Expression 'exp' ( "","" (Expression 'exp')?  )*  )? "")"" {{}} 
 	| ""["" ("","" (Expression 'exp')? )+ ""]"" {{}}
 	| ""("" ("","" (Expression 'exp')? )+ "")"" {{}}
          ; 
-FunctionCall 
-	: ( FunctionCallName 'function_name' ) OptionalMemberArrayAccess 'opt_access' ""("" FunctionCallArguments 'arguments' "")"" {{}}
-	;
-FunctionCallName
-	: <identifier>
-	;
 FunctionCallArguments 
 	: ""{"" (NameValueList 'name_value_list')? ""}"" {{}} 
 	| (ExpressionList 'exp_list') ? {{}} 

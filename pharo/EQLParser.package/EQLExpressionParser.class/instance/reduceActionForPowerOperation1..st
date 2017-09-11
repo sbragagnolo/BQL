@@ -3,6 +3,6 @@ reduceActionForPowerOperation1: nodes
 	| result |
 	result := EQLPowerOperationNode new.
 	result left_exp: (nodes at: 1).
-	result timesTimesToken: (nodes at: 2).
+	result operator: (nodes at: 2).
 	result right_exp: (nodes at: 3).
 	^ result

@@ -7,8 +7,8 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"left_exp",
-		"likeToken",
-		"right_exp"
+		"right_exp",
+		"operator"
 	],
 	"name" : "EQLLikeOperationNode",
 	"type" : "normal"

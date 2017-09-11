@@ -1,23 +1,24 @@
 generated
 scanForTokenX15
+	currentCharacter == $>
+		ifTrue:
+			[ ^ self scanForTokenX7 ].
 	currentCharacter == $[
-		ifTrue: [ ^ self recordAndReportMatch: #(27) ].
+		ifTrue: [ ^ self recordAndReportMatch: #(25) ].
 	currentCharacter == $]
-		ifTrue: [ ^ self recordAndReportMatch: #(33) ].
-	currentCharacter == $^
-		ifTrue: [ ^ self recordAndReportMatch: #(12) ].
+		ifTrue: [ ^ self recordAndReportMatch: #(39) ].
 	currentCharacter == $h
 		ifTrue:
 			[ ^ self scanForTokenX1 ].
 	currentCharacter == ${
-		ifTrue: [ ^ self recordAndReportMatch: #(52) ].
+		ifTrue: [ ^ self recordAndReportMatch: #(43) ].
 	currentCharacter == $|
 		ifTrue:
-			[ ^ self scanForTokenX7 ].
+			[ ^ self scanForTokenX13 ].
 	currentCharacter == $}
-		ifTrue: [ ^ self recordAndReportMatch: #(47) ].
+		ifTrue: [ ^ self recordAndReportMatch: #(46) ].
 	currentCharacter == $~
-		ifTrue: [ ^ self recordAndReportMatch: #(9) ].
+		ifTrue: [ ^ self recordAndReportMatch: #(8) ].
 	currentCharacter isDigit
 		ifTrue: [ ^ self scan9 ].
 	(currentCharacter isSeparator

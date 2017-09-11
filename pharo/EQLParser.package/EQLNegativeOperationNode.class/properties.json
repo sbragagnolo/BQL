@@ -6,8 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"minusToken",
-		"exp"
+		"exp",
+		"operator"
 	],
 	"name" : "EQLNegativeOperationNode",
 	"type" : "normal"

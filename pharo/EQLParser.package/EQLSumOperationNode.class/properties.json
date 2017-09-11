@@ -7,8 +7,8 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"left_exp",
-		"plusToken",
-		"right_exp"
+		"right_exp",
+		"operator"
 	],
 	"name" : "EQLSumOperationNode",
 	"type" : "normal"

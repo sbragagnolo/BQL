@@ -7,8 +7,8 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"left_exp",
-		"timesTimesToken",
-		"right_exp"
+		"right_exp",
+		"operator"
 	],
 	"name" : "EQLPowerOperationNode",
 	"type" : "normal"

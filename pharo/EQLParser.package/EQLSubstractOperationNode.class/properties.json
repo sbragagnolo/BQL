@@ -7,8 +7,8 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"left_exp",
-		"minusToken",
-		"right_exp"
+		"right_exp",
+		"operator"
 	],
 	"name" : "EQLSubstractOperationNode",
 	"type" : "normal"

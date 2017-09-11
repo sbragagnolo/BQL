@@ -7,8 +7,8 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"left_exp",
-		"divideToken",
-		"right_exp"
+		"right_exp",
+		"operator"
 	],
 	"name" : "EQLDivideOperationNode",
 	"type" : "normal"

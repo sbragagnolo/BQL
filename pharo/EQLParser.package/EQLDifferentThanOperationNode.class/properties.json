@@ -7,8 +7,8 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"left_exp",
-		"bangEqualToken",
-		"right_exp"
+		"right_exp",
+		"operator"
 	],
 	"name" : "EQLDifferentThanOperationNode",
 	"type" : "normal"

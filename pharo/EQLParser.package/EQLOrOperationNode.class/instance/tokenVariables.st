@@ -1,3 +1,3 @@
 generated
 tokenVariables
-	^ #(#orOrToken #orToken)
+	^ #(#operator)

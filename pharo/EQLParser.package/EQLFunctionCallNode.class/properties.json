@@ -6,11 +6,15 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"function_name",
 		"leftParenToken",
 		"arguments",
 		"rightParenToken",
-		"opt_access"
+		"property",
+		"periodTokens",
+		"members",
+		"leftBracketTokens",
+		"access_expressions",
+		"rightBracketTokens"
 	],
 	"name" : "EQLFunctionCallNode",
 	"type" : "normal"

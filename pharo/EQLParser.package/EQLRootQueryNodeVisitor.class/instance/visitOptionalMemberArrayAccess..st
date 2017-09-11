@@ -1,3 +1,0 @@
-generated
-visitOptionalMemberArrayAccess: anOptionalMemberArrayAccess
-	^ self visitRootQuery: anOptionalMemberArrayAccess

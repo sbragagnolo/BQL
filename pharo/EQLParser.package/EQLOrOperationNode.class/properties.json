@@ -7,9 +7,8 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"left_exp",
-		"orOrToken",
-		"orToken",
-		"right_exp"
+		"right_exp",
+		"operator"
 	],
 	"name" : "EQLOrOperationNode",
 	"type" : "normal"

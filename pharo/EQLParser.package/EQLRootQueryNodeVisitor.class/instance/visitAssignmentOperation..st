@@ -1,3 +1,0 @@
-generated
-visitAssignmentOperation: anAssignmentOperation
-	^ self visitRootQuery: anAssignmentOperation
