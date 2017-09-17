@@ -41,19 +41,33 @@
 ### Parser & AST Definition
 
 RootQuery : ( Clause 'clause')* {{}}	;
-Clause : SelectStatement | CreateStatement ;
+Clause : SelectStatement | CreateStatement |SetStatement ;
 
 SelectStatement: "select" ExpressionList 'binding' FromStatement 'from' (DomainStatement 'domain')?  ( WhereStatement  'where')? (OrderByStatement 'orderBy')? (LimitStatement 'limit')? {{}};
+
 CreateStatement: "create" "buffer" <identifier> 'name' "{" SelectStatement 'selection' "}" {{}};
 
+
+SetStatement: UnionStatement | IntersectionStatement | MinusStatement;
+
+UnionStatement:   "(" (SetStatement |SelectStatement) 'left_collection' ")"  "union"  "(" (SetStatement | SelectStatement) 'right_collection' ")"   {{}};
+IntersectionStatement:   "(" (SetStatement |SelectStatement) 'left_collection' ")"  "intersect"  "(" (SetStatement | SelectStatement) 'right_collection' ")"   {{}};
+MinusStatement:   "(" (SetStatement |SelectStatement) 'left_collection' ")"  "minus"  "(" (SetStatement | SelectStatement) 'right_collection' ")"   {{}};
+
+
 DomainStatement: "domain" <url> 'url' {{}};
-FromStatement: "from" SourceList 'sources' {{}};
+
+FromStatement: "from" SourceBind 'base_source' (Join 'sources')* {{}};
 
 SourceBind: <identifier> 'binding' "in" <identifier> 'buffer_name' {{}};
-SourceList
-	: SourceBind 'source' ( "," SourceBind 'source' )* {{}};
 
-WhereStatement: "where"  Expression 'expression' {{}};
+WhereStatement: "where"  (BooleanOperation | CompareOperation) 'expression' {{}};
+
+InnerJoin: "join" SourceBind 'joined_source' "on" (BooleanOperation | CompareOperation) 'expression' {{}};
+LeftJoin: "left" "join" SourceBind 'joined_source' "on" (BooleanOperation | CompareOperation) 'expression' {{}};
+RightJoin: "right" "join" SourceBind 'joined_source' "on" (BooleanOperation | CompareOperation) 'expression' {{}};
+Join: InnerJoin | LeftJoin | RightJoin;
+
 
 OrderByStatement: "order" "by" Expression 'expression' {{}};
 
@@ -80,11 +94,11 @@ LimitStatement: "limit" <decimalnumber> 'amount' {{}};
 		| AndOperation  ;
 
 	AndOperation:
-		BooleanOperable 'left_exp' ("&&"|"and") 'operator'  BooleanOperable 'right_exp' {{}};
+		BooleanOperable 'left_exp' ("&&"|"and")  BooleanOperable 'right_exp' {{}};
 	OrOperation:
-		 BooleanOperable 'left_exp' ("||"|"or") 'operator' BooleanOperable 'right_exp' {{}};
+		 BooleanOperable 'left_exp' ("||"|"or") BooleanOperable 'right_exp' {{}};
 	NotOperation:	
-		 ("!" | "~" ) 'operator' BooleanOperable 'exp' {{}};
+		 ("!" | "~" ) BooleanOperable 'exp' {{}};
 
 
 ### Arithmetics! 
@@ -118,23 +132,33 @@ ComparisionOperable:
 
 CompareOperation: 
 	(LesserThanOperation | LesserEqualsThanOperation | GreaterThanOperation| GreaterEqualsThanOperation)
-	|(EqualsToOperation | DifferentThanOperation | LikeOperation);
+	|(EqualsToOperation | DifferentThanOperation | LikeOperation | InOperation | BetweenOperation | IsNullOperation | IsNotNullOperation );
 
 
 LesserThanOperation: 
-	ComparisionOperable 'left_exp' "<"  'operator' ComparisionOperable 'right_exp' {{}};
+	ComparisionOperable 'left_exp' "<"   ComparisionOperable 'right_exp' {{}};
 LesserEqualsThanOperation: 
-	ComparisionOperable 'left_exp' "<=" 'operator'   ComparisionOperable 'right_exp' {{}};
+	ComparisionOperable 'left_exp' "<="   ComparisionOperable 'right_exp' {{}};
 GreaterThanOperation: 
-	ComparisionOperable 'left_exp' ">" 'operator'  ComparisionOperable 'right_exp' {{}};
+	ComparisionOperable 'left_exp' ">"  ComparisionOperable 'right_exp' {{}};
 GreaterEqualsThanOperation: 
-	ComparisionOperable 'left_exp' ">=" 'operator'  ComparisionOperable 'right_exp' {{}};
+	ComparisionOperable 'left_exp' ">=" ComparisionOperable 'right_exp' {{}};
 EqualsToOperation: 
-	ComparisionOperable 'left_exp' ("==" | "=") 'operator'  ComparisionOperable 'right_exp' {{}};
+	ComparisionOperable 'left_exp' ("==" | "=")  ComparisionOperable 'right_exp' {{}};
 DifferentThanOperation: 
-	ComparisionOperable 'left_exp' ("!=" | "<>") 'operator'  ComparisionOperable 'right_exp' {{}};
+	ComparisionOperable 'left_exp' ("!=" | "<>")   ComparisionOperable 'right_exp' {{}};
 LikeOperation: 
-	ComparisionOperable 'left_exp' "like"  'operator' ComparisionOperable 'right_exp' {{}};
+	ComparisionOperable 'left_exp' "like" ComparisionOperable 'right_exp' {{}};
+InOperation: 
+	ComparisionOperable 'left_exp' "in"  TupleExpression 'right_exp' {{}};
+BetweenOperation: 
+	ComparisionOperable 'left_exp' "between"  ComparisionOperable 'left_guard' "and" ComparisionOperable 'right_guard' {{}};
+IsNullOperation: 
+	TermExpression 'expression' "is" "null"   {{}};
+IsNotNullOperation: 
+	TermExpression 'left_exp' "is" "not" "null" {{}};
+
+
 
 ParenthesisArithmeticExpression: "(" ArithmeticOperation 'exp' ")"  {{}};
 ParenthesisBooleanExpression: "(" BooleanOperation 'exp' ")"  {{}};
@@ -152,18 +176,49 @@ Expression :
 	;
 
 TermExpression
-	: <identifier>
-	| <identifier> 'property'  ( "." <identifier> 'member' |  "[" Expression 'acess_expression' "]" ) +  {{MemberOrArrayAccess}}
-	| <identifier> 'property'  ( "." <identifier> 'member' |  "[" Expression 'acess_expression' "]" ) *  "(" FunctionCallArguments 'arguments' ")" {{FunctionCall}}
-	| <booleanliteral>
+	: IdentifierLiteral
+	| MethodCall
+	| MemberAccess
+	| ArrayAccess
+	| FunctionCall
+	| BooleanLiteral
 	| NumberLiteral 
-	| <hexliteral>
-	| <stringLiteral>
+	| HexadecimalLiteral
+	| StringLiteral
 	;
+
+MemberAccess
+	: <identifier> 'value'  ( "."  <identifier>  'member' ) +  {{}};
+
+ArrayAccess 
+	: <identifier> 'value' "[" Expression 'access' "]" {{}}
+	| <identifier> 'value'  ( "."  <identifier>  'member' ) +  "[" Expression 'access' "]"  {{}};
+
+FunctionCall
+	: <identifier> 'selector'  "(" FunctionCallArguments 'arguments' ")" {{}};
+
+MethodCall
+	: <identifier> 'value'  "."  FunctionCall 'message_send' {{}}
+	| <identifier> 'value'  ( "." <identifier> 'member' ) + "."  FunctionCall 'message_send' {{}};
+
+IdentifierLiteral 
+	: <identifier> 'value' {{}};
+
+BooleanLiteral
+	: <booleanliteral> 'value' {{}};
+
+StringLiteral
+	: <stringLiteral> 'value' {{}};
+
+HexadecimalLiteral 
+	: <hexliteral> 'value' {{}};
+
+
 
 NumberLiteral 
 	: ( <realnumber> | <hexnumber> | <decimalnumber> ) 'number' (NumberUnit 'unit')? {{}}
 	;
+
 NumberUnit 
 	: "wei" 
 	| "szabo"
