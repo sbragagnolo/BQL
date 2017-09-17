@@ -1,0 +1,17 @@
+{
+	"commentStamp" : "",
+	"super" : "EQLRootQueryNode",
+	"category" : "EQLParser",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"onToken",
+		"expression",
+		"leftToken",
+		"joinToken",
+		"joined_source"
+	],
+	"name" : "EQLLeftJoinNode",
+	"type" : "normal"
+}

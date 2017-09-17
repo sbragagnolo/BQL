@@ -8,7 +8,8 @@
 	"instvars" : [
 		"left_exp",
 		"right_exp",
-		"operator"
+		"bangEqualToken",
+		"lessThanGreaterThanToken"
 	],
 	"name" : "EQLDifferentThanOperationNode",
 	"type" : "normal"

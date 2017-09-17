@@ -6,9 +6,9 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"property",
 		"periodTokens",
-		"members"
+		"members",
+		"value"
 	],
 	"name" : "EQLMemberAccessNode",
 	"type" : "normal"

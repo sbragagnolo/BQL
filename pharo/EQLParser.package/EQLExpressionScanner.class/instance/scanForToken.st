@@ -7,7 +7,7 @@ scanForToken
 	currentCharacter == $"
 		ifTrue: [ ^ self scan1 ].
 	currentCharacter == $%
-		ifTrue: [ ^ self recordAndReportMatch: #(4) ].
+		ifTrue: [ ^ self recordAndReportMatch: #(3) ].
 	currentCharacter == $&
 		ifTrue:
 			[ ^ self scanForTokenX14 ].

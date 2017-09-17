@@ -7,7 +7,8 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"exp",
-		"operator"
+		"bangToken",
+		"tildeToken"
 	],
 	"name" : "EQLNotOperationNode",
 	"type" : "normal"

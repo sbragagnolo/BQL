@@ -1,3 +1,3 @@
 generated
 tokenVariables
-	^ #(#property #leftBracketToken #rightBracketToken)
+	^ #(#value #leftBracketToken #rightBracketToken)

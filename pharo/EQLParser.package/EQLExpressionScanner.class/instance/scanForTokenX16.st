@@ -1,9 +1,9 @@
 generated
 scanForTokenX16
 	currentCharacter == $(
-		ifTrue: [ ^ self recordAndReportMatch: #(31) ].
+		ifTrue: [ ^ self recordAndReportMatch: #(11) ].
 	currentCharacter == $)
-		ifTrue: [ ^ self recordAndReportMatch: #(19) ].
+		ifTrue: [ ^ self recordAndReportMatch: #(22) ].
 	currentCharacter == $*
 		ifTrue:
 			[ ^ self scanForTokenX10 ].
@@ -11,7 +11,7 @@ scanForTokenX16
 		ifTrue:
 			[ ^ self scanForTokenX9 ].
 	currentCharacter == $,
-		ifTrue: [ ^ self recordAndReportMatch: #(21) ].
+		ifTrue: [ ^ self recordAndReportMatch: #(23) ].
 	currentCharacter == $-
 		ifTrue:
 			[ ^ self scanForTokenX4 ].
@@ -25,7 +25,7 @@ scanForTokenX16
 		ifTrue:
 			[ ^ self scanForTokenX3 ].
 	currentCharacter == $:
-		ifTrue: [ ^ self recordAndReportMatch: #(17) ].
+		ifTrue: [ ^ self recordAndReportMatch: #(20) ].
 	currentCharacter == $<
 		ifTrue:
 			[ ^ self scanForTokenX5 ].

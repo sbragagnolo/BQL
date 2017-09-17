@@ -1,9 +1,9 @@
 generated
 scanForTokenX4
-	self recordMatch: #(3).
+	self recordMatch: #(16).
 	self step.
 	currentCharacter == $-
-		ifTrue: [ [ self recordMatch: #(65).
+		ifTrue: [ [ self recordMatch: #(76).
 			self step.
 			currentCharacter <= Character tab
 				or: [ (currentCharacter between: Character pageUp and: Character newPage)

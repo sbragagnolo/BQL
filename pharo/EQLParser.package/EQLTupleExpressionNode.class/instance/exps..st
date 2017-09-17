@@ -1,3 +1,5 @@
 generated
 exps: anOrderedCollection
-	exps := anOrderedCollection
+	self setParents: self exps to: nil.
+	exps := anOrderedCollection.
+	self setParents: self exps to: self

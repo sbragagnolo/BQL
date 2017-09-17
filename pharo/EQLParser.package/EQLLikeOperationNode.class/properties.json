@@ -8,7 +8,7 @@
 	"instvars" : [
 		"left_exp",
 		"right_exp",
-		"operator"
+		"likeToken"
 	],
 	"name" : "EQLLikeOperationNode",
 	"type" : "normal"

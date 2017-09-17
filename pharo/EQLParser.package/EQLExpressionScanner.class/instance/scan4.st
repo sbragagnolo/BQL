@@ -2,7 +2,7 @@ generated
 scan4
 	self step.
 	currentCharacter isDigit
-		ifTrue: [ [ self recordMatch: #(62).
+		ifTrue: [ [ self recordMatch: #(73).
 			self step.
 			currentCharacter isDigit ] whileTrue ].
 	^ self reportLastMatch

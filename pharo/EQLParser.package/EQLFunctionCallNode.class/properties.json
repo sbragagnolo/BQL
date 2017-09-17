@@ -9,12 +9,7 @@
 		"leftParenToken",
 		"arguments",
 		"rightParenToken",
-		"property",
-		"periodTokens",
-		"members",
-		"leftBracketTokens",
-		"access_expressions",
-		"rightBracketTokens"
+		"selector"
 	],
 	"name" : "EQLFunctionCallNode",
 	"type" : "normal"

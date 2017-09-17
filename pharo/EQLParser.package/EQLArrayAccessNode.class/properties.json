@@ -7,9 +7,11 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"leftBracketToken",
-		"property",
-		"access_expression",
-		"rightBracketToken"
+		"rightBracketToken",
+		"access",
+		"periodTokens",
+		"members",
+		"value"
 	],
 	"name" : "EQLArrayAccessNode",
 	"type" : "normal"

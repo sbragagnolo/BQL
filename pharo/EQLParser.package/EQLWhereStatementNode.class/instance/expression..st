@@ -1,3 +1,7 @@
 generated
-expression: anObject
-	expression := anObject
+expression: anEQLRootQueryNode
+	self expression notNil
+		ifTrue: [ self expression parent: nil ].
+	expression := anEQLRootQueryNode.
+	self expression notNil
+		ifTrue: [ self expression parent: self ]

@@ -1,3 +1,3 @@
 generated
 nodeVariables
-	^ #(#sources)
+	^ #(#base_source)
