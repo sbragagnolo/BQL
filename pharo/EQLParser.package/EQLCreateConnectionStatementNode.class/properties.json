@@ -6,12 +6,11 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"binding",
-		"inToken",
-		"buffer_name",
-		"database",
-		"atToken"
+		"createToken",
+		"connectionToken",
+		"name",
+		"url"
 	],
-	"name" : "EQLSourceBindNode",
+	"name" : "EQLCreateConnectionStatementNode",
 	"type" : "normal"
 }

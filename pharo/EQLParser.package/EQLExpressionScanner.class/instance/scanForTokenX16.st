@@ -1,7 +1,7 @@
 generated
 scanForTokenX16
 	currentCharacter == $(
-		ifTrue: [ ^ self recordAndReportMatch: #(11) ].
+		ifTrue: [ ^ self recordAndReportMatch: #(15) ].
 	currentCharacter == $)
 		ifTrue: [ ^ self recordAndReportMatch: #(22) ].
 	currentCharacter == $*

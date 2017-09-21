@@ -8,7 +8,7 @@ definitionComment
 <booleanliteral> : true | false ;
 <reservedkeywords>:  SELECT | FROM | IN | AT |LIMIT| PORT | WHERE  | ORDER | BY |  IS | AND | OR | NOT | CONTRACTS | TRANSACTIONS | BLOCKS | TYPE | ACCOUNTS | CONTRACT | ACTIVATED-METHODS | STAMP | CREATE | BUFFER | DIRECTORY | REPOSITORY  | WEI ;
 <identifier>: [a-zA-Z_$] [a-zA-Z_$0-9]* ;
-<url>: [a-zA-Z_$] [a-zA-Z_$0-9]*[\:]  [0-9]+ ;
+<url>: [a-zA-Z_$] [a-zA-Z_$0-9]*[\:] [a-zA-Z_$/] [a-zA-Z_$0-9.@:/]* ;
 <whitespace>: \s+ ;
 <stringLiteral>: ( [""] ( [^""\r\n]  | ([ \\ ] . ) )* [""] ) 
                | ( ['] ( [^'\r\n]  | ([ \\ ] . ) )* ['] ) ;
@@ -43,12 +43,12 @@ definitionComment
 ### Parser & AST Definition
 
 RootQuery : ( Clause 'clause')* {{}}	;
-Clause : SelectStatement | CreateStatement |SetStatement ;
+Clause : SelectStatement | CreateStatement |SetStatement |CreateConnectionStatement;
 
 SelectStatement: ""select"" ExpressionList 'binding' FromStatement 'from' (DomainStatement 'domain')?  ( WhereStatement  'where')? (OrderByStatement 'orderBy')? (LimitStatement 'limit')? {{}};
 
 CreateStatement: ""create"" ""buffer"" <identifier> 'name' ""{"" SelectStatement 'selection' ""}"" {{}};
-
+CreateConnectionStatement: ""create"" ""connection"" <identifier> 'name'    <url> 'url' {{}};
 
 SetStatement: UnionStatement | IntersectionStatement | MinusStatement;
 
@@ -61,7 +61,7 @@ DomainStatement: ""domain"" <url> 'url' {{}};
 
 FromStatement: ""from"" SourceBind 'base_source' (Join 'sources')* {{}};
 
-SourceBind: <identifier> 'binding' ""in"" <identifier> 'buffer_name' {{}};
+SourceBind: <identifier> 'binding' ""in"" <identifier> 'buffer_name' ( ""at"" (<identifier> | <url> ) 'database' )? {{}};
 
 WhereStatement: ""where""  (BooleanOperation | CompareOperation) 'expression' {{}};
 
