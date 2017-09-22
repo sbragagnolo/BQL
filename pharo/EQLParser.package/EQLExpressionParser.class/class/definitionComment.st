@@ -61,7 +61,7 @@ DomainStatement: ""domain"" <url> 'url' {{}};
 
 FromStatement: ""from"" SourceBind 'base_source' (Join 'sources')* {{}};
 
-SourceBind: <identifier> 'binding' ""in"" <identifier> 'buffer_name' ( ""at"" (<identifier> | <url> ) 'database' )? {{}};
+SourceBind: <identifier> 'binding' ""in"" (IdentifierLiteral | MemberAccess) 'buffer_name' ( ""at"" (<identifier> | <url> ) 'database' )? {{}};
 
 WhereStatement: ""where""  (BooleanOperation | CompareOperation) 'expression' {{}};
 

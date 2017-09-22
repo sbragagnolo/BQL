@@ -1,3 +1,3 @@
 generated
 tokenVariables
-	^ #(#binding #inToken #buffer_name #atToken #database)
+	^ #(#binding #inToken #atToken #database)
