@@ -76,19 +76,9 @@ OrderByStatement: ""order"" ""by"" Expression 'expression' {{}};
 LimitStatement: ""limit"" <decimalnumber> 'amount' {{}};
 
 
-### Dates !
-	StringDate: 
-		<stringLiteral> 'date' ""Date""{{}};
-	NowDate: 
-		""Now"" {{}};
-	Date: 
-		StringDate
-	      | NowDate;
-		
-
 ### Booleans! 
 	BooleanOperable: 
-		(BooleanOperation | CompareOperation | TermExpression | ParenthesisBooleanExpression | ParenthesisCompareExpression);
+		(TermExpression| BooleanOperation | CompareOperation | ParenthesisBooleanExpression | ParenthesisCompareExpression);
 
 	BooleanOperation:
 		NotOperation
@@ -105,7 +95,7 @@ LimitStatement: ""limit"" <decimalnumber> 'amount' {{}};
 
 ### Arithmetics! 
 	ArithmeticallyOperable: 
-		ArithmeticOperation | TermExpression | ParenthesisArithmeticExpression | Date ;
+		ArithmeticOperation | TermExpression | ParenthesisArithmeticExpression  ;
 
 	ArithmeticOperation: 
 		NegativeOperation 
@@ -130,11 +120,11 @@ LimitStatement: ""limit"" <decimalnumber> 'amount' {{}};
 
 ### Comparisions!
 ComparisionOperable: 
-	(ArithmeticOperation | TermExpression | ParenthesisArithmeticExpression | Date ); 
+	(TermExpression | ArithmeticOperation |  ParenthesisArithmeticExpression  ); 
 
 CompareOperation: 
 	(LesserThanOperation | LesserEqualsThanOperation | GreaterThanOperation| GreaterEqualsThanOperation)
-	|(EqualsToOperation | DifferentThanOperation | LikeOperation | InOperation | BetweenOperation | IsNullOperation | IsNotNullOperation );
+	|(EqualsToOperation | DifferentThanOperation | LikeOperation | InOperation | BetweenOperation | IsNullOperation | IsNotNullOperation  );
 
 
 LesserThanOperation: 
@@ -173,21 +163,31 @@ Expression :
 	| CompareOperation
 	| BooleanOperation
 	| TupleExpression
-	| Date
 	| TermExpression 
 	;
 
 TermExpression
+	: Call
+	| Access
+	| Literal;
+
+
+Access
+	: MemberAccess
+	| ArrayAccess;
+
+
+Call	
+         : MethodCall
+	| FunctionCall;
+
+
+Literal
 	: IdentifierLiteral
-	| MethodCall
-	| MemberAccess
-	| ArrayAccess
-	| FunctionCall
 	| BooleanLiteral
-	| NumberLiteral 
-	| HexadecimalLiteral
 	| StringLiteral
-	;
+	| HexadecimalLiteral
+	| NumberLiteral;
 
 MemberAccess
 	: <identifier> 'value'  ( "".""  <identifier>  'member' ) +  {{}};
@@ -199,9 +199,13 @@ ArrayAccess
 FunctionCall
 	: <identifier> 'selector'  ""("" FunctionCallArguments 'arguments' "")"" {{}};
 
+
 MethodCall
 	: <identifier> 'value'  "".""  FunctionCall 'message_send' {{}}
-	| <identifier> 'value'  ( ""."" <identifier> 'member' ) + "".""  FunctionCall 'message_send' {{}};
+	| <identifier> 'value'  ( ""."" <identifier> 'member' ) + "".""  FunctionCall 'message_send' {{}}
+	| (<realnumber> | <hexnumber> | <decimalnumber>) 'value'  ( ""."" <identifier> 'member' ) + "".""  FunctionCall 'message_send' {{}}
+	| <stringLiteral> 'value'  ( ""."" <identifier> 'member' ) + "".""  FunctionCall 'message_send' {{}}
+	 ;
 
 IdentifierLiteral 
 	: <identifier> 'value' {{}};

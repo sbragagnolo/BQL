@@ -1,7 +1,7 @@
 generated-initialization
 initializeKeywordMap
 	keywordMap := Dictionary new.
-	#(#(78 '--' 2) #(74 'Date' 53) #(74 'Now' 44) #(74 'and' 24) #(74 'at' 59) #(74 'between' 41) #(74 'buffer' 11) #(74 'by' 62) #(74 'connection' 38) #(74 'create' 26) #(74 'days' 45) #(74 'delete' 7) #(74 'domain' 56) #(74 'ether' 49) #(74 'false' 73) #(74 'finney' 52) #(74 'from' 60) #(74 'hours' 48) #(74 'in' 54) #(74 'intersect' 58) #(74 'is' 51) #(74 'join' 68) #(74 'left' 67) #(74 'like' 40) #(74 'limit' 63) #(74 'minus' 55) #(74 'minutes' 47) #(74 'not' 36) #(74 'null' 39) #(74 'on' 66) #(74 'or' 18) #(74 'order' 65) #(74 'right' 64) #(74 'seconds' 50) #(74 'select' 13) #(74 'szabo' 43) #(74 'true' 73) #(74 'union' 57) #(74 'weeks' 46) #(74 'wei' 42) #(74 'where' 61) #(74 'years' 10))
+	#(#(76 '--' 2) #(72 'and' 24) #(72 'at' 63) #(72 'between' 39) #(72 'buffer' 17) #(72 'by' 55) #(72 'connection' 56) #(72 'create' 10) #(72 'days' 43) #(72 'delete' 7) #(72 'domain' 52) #(72 'ether' 47) #(72 'false' 71) #(72 'finney' 42) #(72 'from' 53) #(72 'hours' 46) #(72 'in' 58) #(72 'intersect' 54) #(72 'is' 49) #(72 'join' 66) #(72 'left' 62) #(72 'like' 50) #(72 'limit' 51) #(72 'minus' 59) #(72 'minutes' 45) #(72 'not' 38) #(72 'null' 37) #(72 'on' 64) #(72 'or' 18) #(72 'order' 61) #(72 'right' 60) #(72 'seconds' 48) #(72 'select' 33) #(72 'szabo' 41) #(72 'true' 71) #(72 'union' 57) #(72 'weeks' 44) #(72 'wei' 36) #(72 'where' 65) #(72 'years' 9))
 		do: [ :each | 
 			(keywordMap at: each first ifAbsentPut: [ Dictionary new ])
 				at: (each at: 2)
