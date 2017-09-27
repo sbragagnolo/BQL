@@ -1,14 +1,17 @@
 {
 	"commentStamp" : "",
 	"super" : "EQLRootQueryNode",
-	"category" : "EQLParser",
+	"category" : "EQLParser-nodes",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
 		"value",
-		"message_send",
 		"periodTokens",
+		"selector",
+		"leftParenToken",
+		"arguments",
+		"rightParenToken",
 		"members"
 	],
 	"name" : "EQLMethodCallNode",

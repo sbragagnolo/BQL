@@ -1,3 +1,3 @@
 generated
-value: aSmaCCToken
-	value := aSmaCCToken
+value: anObject
+	value := anObject

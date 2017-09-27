@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "EQLRootQueryNode",
-	"category" : "EQLParser-generated",
+	"category" : "EQLParser-nodes",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
@@ -9,9 +9,9 @@
 		"selectToken",
 		"binding",
 		"from",
+		"domain",
 		"where",
 		"orderBy",
-		"domain",
 		"limit"
 	],
 	"name" : "EQLSelectStatementNode",

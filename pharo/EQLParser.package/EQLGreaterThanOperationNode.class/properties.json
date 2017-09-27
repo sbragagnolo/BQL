@@ -1,14 +1,14 @@
 {
 	"commentStamp" : "",
 	"super" : "EQLRootQueryNode",
-	"category" : "EQLParser",
+	"category" : "EQLParser-nodes",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
 		"left_exp",
-		"right_exp",
-		"greaterThanToken"
+		"greaterThanToken",
+		"right_exp"
 	],
 	"name" : "EQLGreaterThanOperationNode",
 	"type" : "normal"

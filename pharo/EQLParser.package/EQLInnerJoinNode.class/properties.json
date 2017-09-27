@@ -1,15 +1,15 @@
 {
 	"commentStamp" : "",
 	"super" : "EQLRootQueryNode",
-	"category" : "EQLParser",
+	"category" : "EQLParser-nodes",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
 		"joinToken",
+		"joined_source",
 		"onToken",
-		"expression",
-		"joined_source"
+		"expression"
 	],
 	"name" : "EQLInnerJoinNode",
 	"type" : "normal"

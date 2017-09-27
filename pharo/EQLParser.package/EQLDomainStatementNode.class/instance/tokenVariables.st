@@ -1,3 +1,3 @@
 generated
 tokenVariables
-	^ #(#domainToken #url)
+	^ #(#domainToken #url #semicolonToken)

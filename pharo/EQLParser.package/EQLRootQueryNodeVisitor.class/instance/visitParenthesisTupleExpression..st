@@ -1,0 +1,3 @@
+generated
+visitParenthesisTupleExpression: aParenthesisTupleExpression
+	^ self visitRootQuery: aParenthesisTupleExpression

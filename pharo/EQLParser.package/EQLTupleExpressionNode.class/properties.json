@@ -1,17 +1,17 @@
 {
 	"commentStamp" : "",
 	"super" : "EQLRootQueryNode",
-	"category" : "EQLParser-generated",
+	"category" : "EQLParser-nodes",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
 		"leftBracketToken",
+		"exps",
 		"commaTokens",
 		"rightBracketToken",
 		"leftParenToken",
-		"rightParenToken",
-		"exps"
+		"rightParenToken"
 	],
 	"name" : "EQLTupleExpressionNode",
 	"type" : "normal"

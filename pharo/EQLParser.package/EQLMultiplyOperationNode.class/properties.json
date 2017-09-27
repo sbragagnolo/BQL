@@ -1,14 +1,14 @@
 {
 	"commentStamp" : "",
 	"super" : "EQLRootQueryNode",
-	"category" : "EQLParser",
+	"category" : "EQLParser-nodes",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
 		"left_exp",
-		"right_exp",
-		"operator"
+		"operator",
+		"right_exp"
 	],
 	"name" : "EQLMultiplyOperationNode",
 	"type" : "normal"

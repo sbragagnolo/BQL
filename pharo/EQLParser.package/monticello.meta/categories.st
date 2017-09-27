@@ -1,2 +1,3 @@
 SystemOrganization addCategory: #EQLParser!
-SystemOrganization addCategory: 'EQLParser-generated'!
+SystemOrganization addCategory: 'EQLParser-nodes'!
+SystemOrganization addCategory: 'EQLParser-scanner-parser'!

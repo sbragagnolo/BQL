@@ -1,3 +1,3 @@
 generated
 tokenVariables
-	^ #(#number #unit)
+	^ #(#value #semicolonToken)

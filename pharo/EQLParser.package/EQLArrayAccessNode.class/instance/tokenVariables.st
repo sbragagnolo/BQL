@@ -1,3 +1,3 @@
 generated
 tokenVariables
-	^ #(#value #leftBracketToken #rightBracketToken)
+	^ #(#leftBracketToken #rightBracketToken #semicolonToken)

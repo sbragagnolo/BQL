@@ -1,3 +1,3 @@
 generated
 tokenVariables
-	^ #(#binding #inToken #atToken #database)
+	^ #(#binding #inToken #atToken #database #semicolonToken)

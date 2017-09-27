@@ -1,3 +1,3 @@
 generated
 tokenVariables
-	^ #(#greaterThanToken)
+	^ #(#greaterThanToken #semicolonToken)

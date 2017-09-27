@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "EQLRootQueryNode",
-	"category" : "EQLParser",
+	"category" : "EQLParser-nodes",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
@@ -9,8 +9,8 @@
 		"left_exp",
 		"betweenToken",
 		"left_guard",
-		"right_guard",
-		"andToken"
+		"andToken",
+		"right_guard"
 	],
 	"name" : "EQLBetweenOperationNode",
 	"type" : "normal"

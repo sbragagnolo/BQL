@@ -1,3 +1,3 @@
 generated
 tokenVariables
-	^ #(#andAndToken #andToken)
+	^ #(#andAndToken #andToken #semicolonToken)

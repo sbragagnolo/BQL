@@ -1,3 +1,3 @@
 generated
 nodeVariables
-	^ #(#message_send)
+	^ #(#arguments)

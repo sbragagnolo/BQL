@@ -1,3 +1,3 @@
 generated
 tokenVariables
-	^ #(#likeToken)
+	^ #(#likeToken #semicolonToken)

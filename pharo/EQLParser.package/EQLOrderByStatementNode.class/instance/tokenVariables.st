@@ -1,3 +1,3 @@
 generated
 tokenVariables
-	^ #(#orderToken #byToken)
+	^ #(#orderToken #byToken #semicolonToken)

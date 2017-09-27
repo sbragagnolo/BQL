@@ -1,6 +1,6 @@
 generated
 scanForTokenX4
-	self recordMatch: #(16).
+	self recordMatch: #(9).
 	self step.
 	currentCharacter == $-
 		ifTrue: [ [ self recordMatch: #(76).

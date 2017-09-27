@@ -1,3 +1,3 @@
 generated
 tokenVariables
-	^ #(#equalEqualToken #equalToken)
+	^ #(#equalEqualToken #equalToken #semicolonToken)

@@ -4,7 +4,6 @@ definitionComment
 <decimalnumber>: [0-9]+ ;
 <hexnumber>: 0x[0-9a-fA-F]+ ;
 <realnumber>: <decimalnumber>? [\.] <decimalnumber> ; #  added to support real numbers (not in the grammar but apear in the contracts)	
-<hexliteral>: hex ( [""] ( [0-9a-fA-F][0-9a-fA-F] )* [""] |  ['] ( [0-9a-fA-F][0-9a-fA-F] )* [']  );
 <booleanliteral> : true | false ;
 <reservedkeywords>:  SELECT | FROM | IN | AT |LIMIT| PORT | WHERE  | ORDER | BY |  IS | AND | OR | NOT | CONTRACTS | TRANSACTIONS | BLOCKS | TYPE | ACCOUNTS | CONTRACT | ACTIVATED-METHODS | STAMP | CREATE | BUFFER | DIRECTORY | REPOSITORY  | WEI ;
 <identifier>: [a-zA-Z_$] [a-zA-Z_$0-9]* ;
@@ -42,10 +41,14 @@ definitionComment
 
 ### Parser & AST Definition
 
-RootQuery : ( Clause 'clause')* {{}}	;
+RootQuery : ( Clause 'clause')* "";"" {{}} ;
 Clause : SelectStatement | CreateStatement |SetStatement |CreateConnectionStatement;
 
-SelectStatement: ""select"" ExpressionList 'binding' FromStatement 'from' (DomainStatement 'domain')?  ( WhereStatement  'where')? (OrderByStatement 'orderBy')? (LimitStatement 'limit')? {{}};
+
+
+SelectStatement: ""select"" ExpressionList 'binding' FromStatement 'from' (DomainStatement 'domain')?  ( WhereStatement  'where')? (OrderByStatement 'orderBy')? (LimitStatement 'limit')?  {{}};
+
+
 
 CreateStatement: ""create"" ""buffer"" <identifier> 'name' ""{"" SelectStatement 'selection' ""}"" {{}};
 CreateConnectionStatement: ""create"" ""connection"" <identifier> 'name'    <url> 'url' {{}};
@@ -78,7 +81,7 @@ LimitStatement: ""limit"" <decimalnumber> 'amount' {{}};
 
 ### Booleans! 
 	BooleanOperable: 
-		(TermExpression| BooleanOperation | CompareOperation | ParenthesisBooleanExpression | ParenthesisCompareExpression);
+		(TermExpression | BooleanOperation | CompareOperation | ParenthesisBooleanExpression | ParenthesisCompareExpression);
 
 	BooleanOperation:
 		NotOperation
@@ -95,7 +98,7 @@ LimitStatement: ""limit"" <decimalnumber> 'amount' {{}};
 
 ### Arithmetics! 
 	ArithmeticallyOperable: 
-		ArithmeticOperation | TermExpression | ParenthesisArithmeticExpression  ;
+		ArithmeticOperation | TermExpression | Measure | ParenthesisArithmeticExpression  ;
 
 	ArithmeticOperation: 
 		NegativeOperation 
@@ -120,7 +123,7 @@ LimitStatement: ""limit"" <decimalnumber> 'amount' {{}};
 
 ### Comparisions!
 ComparisionOperable: 
-	(TermExpression | ArithmeticOperation |  ParenthesisArithmeticExpression  ); 
+	(TermExpression | ArithmeticOperation |  ParenthesisArithmeticExpression | Measure  ); 
 
 CompareOperation: 
 	(LesserThanOperation | LesserEqualsThanOperation | GreaterThanOperation| GreaterEqualsThanOperation)
@@ -155,8 +158,16 @@ IsNotNullOperation:
 ParenthesisArithmeticExpression: ""("" ArithmeticOperation 'exp' "")""  {{}};
 ParenthesisBooleanExpression: ""("" BooleanOperation 'exp' "")""  {{}};
 ParenthesisCompareExpression: ""("" CompareOperation 'exp' "")""  {{}};
+ParenthesisTupleExpression: ""("" TupleExpression 'exp' "")""  {{}};
+ParenthesisTermExpression: ""("" TermExpression 'exp' "")""  {{}};
 
-ParenthesisExpression: ""("" Expression 'exp' "")""  {{}};
+
+
+ParenthesisExpression: 
+	ParenthesisArithmeticExpression | ParenthesisBooleanExpression | ParenthesisCompareExpression | ParenthesisTupleExpression | ParenthesisTermExpression;
+
+
+
 Expression :  
 	ParenthesisExpression
 	| ArithmeticOperation
@@ -167,9 +178,9 @@ Expression :
 	;
 
 TermExpression
-	: Call
-	| Access
-	| Literal;
+	: Call 
+	| Access 
+	| Literal ;
 
 
 Access
@@ -186,26 +197,29 @@ Literal
 	: IdentifierLiteral
 	| BooleanLiteral
 	| StringLiteral
-	| HexadecimalLiteral
 	| NumberLiteral;
 
 MemberAccess
-	: <identifier> 'value'  ( "".""  <identifier>  'member' ) +  {{}};
+	: <identifier>   'value'  ( "".""  <identifier>  'member' ) +  {{}}
+	| FunctionCall 'value' ( "".""  <identifier>  'member' ) +  {{}} 
+	| MethodCall 'value' ( "".""  <identifier>  'member' ) +  {{}};
 
 ArrayAccess 
 	: <identifier> 'value' ""["" Expression 'access' ""]"" {{}}
-	| <identifier> 'value'  ( "".""  <identifier>  'member' ) +  ""["" Expression 'access' ""]""  {{}};
+	| <identifier> 'value'  ( "".""   <identifier>  'member' ) +  ""["" Expression 'access' ""]""  {{}}
+	| FunctionCall 'value'  ( "".""  <identifier>  'member' ) *  ""["" Expression 'access' ""]""  {{}}
+	| MethodCall 'value'  ( "".""  <identifier>  'member' ) *  ""["" Expression 'access' ""]""  {{}};
 
 FunctionCall
-	: <identifier> 'selector'  ""("" FunctionCallArguments 'arguments' "")"" {{}};
-
+	: <identifier> 'selector'  ""("" FunctionCallArguments 'arguments' "")""  {{}} ;
 
 MethodCall
-	: <identifier> 'value'  "".""  FunctionCall 'message_send' {{}}
-	| <identifier> 'value'  ( ""."" <identifier> 'member' ) + "".""  FunctionCall 'message_send' {{}}
-	| (<realnumber> | <hexnumber> | <decimalnumber>) 'value'  ( ""."" <identifier> 'member' ) + "".""  FunctionCall 'message_send' {{}}
-	| <stringLiteral> 'value'  ( ""."" <identifier> 'member' ) + "".""  FunctionCall 'message_send' {{}}
-	 ;
+	: <identifier> 'value'  "".""  <identifier> 'selector' ""("" FunctionCallArguments 'arguments' "")""  {{}}
+	| <identifier> 'value'  ( ""."" <identifier> 'member' ) + "".""   <identifier> 'selector' ""("" FunctionCallArguments 'arguments' "")"" {{}} 
+	| (<realnumber>|<hexnumber>|<decimalnumber>) 'value' ( ""."" <identifier> 'member' ) * ""."" <identifier> 'selector' ""("" FunctionCallArguments 'arguments' "")"" {{}} 
+	| <stringLiteral> 'value'  ( ""."" <identifier> 'member' ) * "".""   <identifier> 'selector' ""("" FunctionCallArguments 'arguments' "")""  {{}}
+	| FunctionCall 'value'  ( ""."" <identifier> 'member' ) * "".""   <identifier> 'selector' ""("" FunctionCallArguments 'arguments' "")""  {{}} 
+	| MethodCall 'value'  ( ""."" <identifier> 'member' ) *  "".""   <identifier> 'selector' ""("" FunctionCallArguments 'arguments' "")""  {{}} ;
 
 IdentifierLiteral 
 	: <identifier> 'value' {{}};
@@ -214,17 +228,13 @@ BooleanLiteral
 	: <booleanliteral> 'value' {{}};
 
 StringLiteral
-	: <stringLiteral> 'value' {{}};
-
-HexadecimalLiteral 
-	: <hexliteral> 'value' {{}};
-
-
+ 	: <stringLiteral> 'value' {{}};
 
 NumberLiteral 
-	: ( <realnumber> | <hexnumber> | <decimalnumber> ) 'number' (NumberUnit 'unit')? {{}}
-	;
+	: ( <realnumber> | <hexnumber> | <decimalnumber> ) 'value' {{}};
 
+Measure:
+	NumberLiteral 'value' NumberUnit 'unit' {{}};
 NumberUnit 
 	: ""wei"" 
 	| ""szabo""

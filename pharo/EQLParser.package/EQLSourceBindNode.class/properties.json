@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "EQLRootQueryNode",
-	"category" : "EQLParser",
+	"category" : "EQLParser-nodes",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
@@ -9,8 +9,8 @@
 		"binding",
 		"inToken",
 		"buffer_name",
-		"database",
-		"atToken"
+		"atToken",
+		"database"
 	],
 	"name" : "EQLSourceBindNode",
 	"type" : "normal"
