@@ -1,5 +1,5 @@
 generated-reduction actions
-reduceActionFor___at_____identifier___url____1: nodes
+reduceActionFor___at____IdentifierLiteral_UrlLiteral___1: nodes
 	| result |
 	result := Array new: 2.
 	^ result

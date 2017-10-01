@@ -1,7 +1,7 @@
 generated
-right_exp: anEQLRootQueryNode
+right_exp: anEQLStringLiteralNode
 	self right_exp notNil
 		ifTrue: [ self right_exp parent: nil ].
-	right_exp := anEQLRootQueryNode.
+	right_exp := anEQLStringLiteralNode.
 	self right_exp notNil
 		ifTrue: [ self right_exp parent: self ]

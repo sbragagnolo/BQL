@@ -50,8 +50,8 @@ SelectStatement: ""select"" ExpressionList 'binding' FromStatement 'from' (Domai
 
 
 
-CreateStatement: ""create"" ""buffer"" <identifier> 'name' ""{"" SelectStatement 'selection' ""}"" {{}};
-CreateConnectionStatement: ""create"" ""connection"" <identifier> 'name'    <url> 'url' {{}};
+CreateStatement: ""create"" ""buffer"" IdentifierLiteral 'name' ""{"" SelectStatement 'selection' ""}"" {{}};
+CreateConnectionStatement: ""create"" ""connection"" IdentifierLiteral 'name'  UrlLiteral 'url' {{}};
 
 SetStatement: UnionStatement | IntersectionStatement | MinusStatement;
 
@@ -60,11 +60,11 @@ IntersectionStatement:   ""("" (SetStatement |SelectStatement) 'left_collection'
 MinusStatement:   ""("" (SetStatement |SelectStatement) 'left_collection' "")""  ""minus""  ""("" (SetStatement | SelectStatement) 'right_collection' "")""   {{}};
 
 
-DomainStatement: ""domain"" <url> 'url' {{}};
+DomainStatement: ""domain"" UrlLiteral 'url' {{}};
 
 FromStatement: ""from"" SourceBind 'base_source' (Join 'sources')* {{}};
 
-SourceBind: <identifier> 'binding' ""in"" (IdentifierLiteral | MemberAccess) 'buffer_name' ( ""at"" (<identifier> | <url> ) 'database' )? {{}};
+SourceBind: IdentifierLiteral 'binding' ""in"" (IdentifierLiteral | MemberAccess) 'buffer_name' ( ""at"" (IdentifierLiteral | UrlLiteral ) 'database' )? {{}};
 
 WhereStatement: ""where""  (BooleanOperation | CompareOperation) 'expression' {{}};
 
@@ -143,7 +143,7 @@ EqualsToOperation:
 DifferentThanOperation: 
 	ComparisionOperable 'left_exp' (""!="" | ""<>"")   ComparisionOperable 'right_exp' {{}};
 LikeOperation: 
-	ComparisionOperable 'left_exp' ""like"" ComparisionOperable 'right_exp' {{}};
+	ComparisionOperable 'left_exp' ""like"" StringLiteral 'right_exp' {{}};
 InOperation: 
 	ComparisionOperable 'left_exp' ""in""  TupleExpression 'right_exp' {{}};
 BetweenOperation: 
@@ -197,29 +197,30 @@ Literal
 	: IdentifierLiteral
 	| BooleanLiteral
 	| StringLiteral
-	| NumberLiteral;
+	| NumberLiteral
+	| UrlLiteral;
 
 MemberAccess
-	: <identifier>   'value'  ( "".""  <identifier>  'member' ) +  {{}}
-	| FunctionCall 'value' ( "".""  <identifier>  'member' ) +  {{}} 
-	| MethodCall 'value' ( "".""  <identifier>  'member' ) +  {{}};
+	: IdentifierLiteral  'value'  ( "".""  IdentifierLiteral  'member' ) +  {{}}
+	| FunctionCall 'value' ( "".""  IdentifierLiteral  'member' ) +  {{}} 
+	| MethodCall 'value' ( "".""  IdentifierLiteral 'member' ) +  {{}};
 
 ArrayAccess 
-	: <identifier> 'value' ""["" Expression 'access' ""]"" {{}}
-	| <identifier> 'value'  ( "".""   <identifier>  'member' ) +  ""["" Expression 'access' ""]""  {{}}
-	| FunctionCall 'value'  ( "".""  <identifier>  'member' ) *  ""["" Expression 'access' ""]""  {{}}
-	| MethodCall 'value'  ( "".""  <identifier>  'member' ) *  ""["" Expression 'access' ""]""  {{}};
+	: IdentifierLiteral 'value' ""["" Expression 'access' ""]"" {{}}
+	| IdentifierLiteral 'value'  ( "".""   IdentifierLiteral  'member' ) +  ""["" Expression 'access' ""]""  {{}}
+	| FunctionCall 'value'  ( "".""  IdentifierLiteral 'member' ) *  ""["" Expression 'access' ""]""  {{}}
+	| MethodCall 'value'  ( "".""  IdentifierLiteral 'member' ) *  ""["" Expression 'access' ""]""  {{}};
 
 FunctionCall
-	: <identifier> 'selector'  ""("" FunctionCallArguments 'arguments' "")""  {{}} ;
+	: IdentifierLiteral 'selector'  ""("" FunctionCallArguments 'arguments' "")""  {{}} ;
 
 MethodCall
-	: <identifier> 'value'  "".""  <identifier> 'selector' ""("" FunctionCallArguments 'arguments' "")""  {{}}
-	| <identifier> 'value'  ( ""."" <identifier> 'member' ) + "".""   <identifier> 'selector' ""("" FunctionCallArguments 'arguments' "")"" {{}} 
-	| (<realnumber>|<hexnumber>|<decimalnumber>) 'value' ( ""."" <identifier> 'member' ) * ""."" <identifier> 'selector' ""("" FunctionCallArguments 'arguments' "")"" {{}} 
-	| <stringLiteral> 'value'  ( ""."" <identifier> 'member' ) * "".""   <identifier> 'selector' ""("" FunctionCallArguments 'arguments' "")""  {{}}
-	| FunctionCall 'value'  ( ""."" <identifier> 'member' ) * "".""   <identifier> 'selector' ""("" FunctionCallArguments 'arguments' "")""  {{}} 
-	| MethodCall 'value'  ( ""."" <identifier> 'member' ) *  "".""   <identifier> 'selector' ""("" FunctionCallArguments 'arguments' "")""  {{}} ;
+	: IdentifierLiteral 'value'  "".""  IdentifierLiteral 'selector' ""("" FunctionCallArguments 'arguments' "")""  {{}}
+	| IdentifierLiteral 'value'  ( ""."" IdentifierLiteral 'member' ) + "".""   IdentifierLiteral 'selector' ""("" FunctionCallArguments 'arguments' "")"" {{}} 
+	| NumberLiteral 'value' ( ""."" IdentifierLiteral 'member' ) * ""."" IdentifierLiteral 'selector' ""("" FunctionCallArguments 'arguments' "")"" {{}} 
+	| StringLiteral 'value'  ( ""."" IdentifierLiteral 'member' ) * "".""   IdentifierLiteral'selector' ""("" FunctionCallArguments 'arguments' "")""  {{}}
+	| FunctionCall 'value'  ( ""."" IdentifierLiteral 'member' ) * "".""   IdentifierLiteral 'selector' ""("" FunctionCallArguments 'arguments' "")""  {{}} 
+	| MethodCall 'value'  ( ""."" IdentifierLiteral 'member' ) *  "".""   IdentifierLiteral 'selector' ""("" FunctionCallArguments 'arguments' "")""  {{}} ;
 
 IdentifierLiteral 
 	: <identifier> 'value' {{}};
@@ -232,6 +233,10 @@ StringLiteral
 
 NumberLiteral 
 	: ( <realnumber> | <hexnumber> | <decimalnumber> ) 'value' {{}};
+
+UrlLiteral
+	: <url> 'value' {{}};
+
 
 Measure:
 	NumberLiteral 'value' NumberUnit 'unit' {{}};
@@ -259,7 +264,7 @@ FunctionCallArguments
 	;
 
 NameValueList 
-	: <identifier> 'id' "":"" Expression 'exp' ( "","" <identifier> 'id' "":"" Expression 'exp' )* ("","")? {{}}
+	: IdentifierLiteral 'id' "":"" Expression 'exp' ( "","" IdentifierLiteral 'id' "":"" Expression 'exp' )* ("","")? {{}}
 	;
 ExpressionList
 	: Expression 'exp' ( "","" Expression 'exp' )* {{}}

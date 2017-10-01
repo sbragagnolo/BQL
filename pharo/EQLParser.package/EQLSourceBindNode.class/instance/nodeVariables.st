@@ -1,3 +1,3 @@
 generated
 nodeVariables
-	^ #(#buffer_name)
+	^ #(#binding #buffer_name #database)

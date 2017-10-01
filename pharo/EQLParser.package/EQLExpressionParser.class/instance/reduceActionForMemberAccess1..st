@@ -4,5 +4,5 @@ reduceActionForMemberAccess1: nodes
 	result := EQLMemberAccessNode new.
 	result value: (nodes at: 1).
 	result addTokens: ((nodes at: 2) at: 1) to: result periodTokens.
-	result addTokens: ((nodes at: 2) at: 2) to: result members.
+	result addNodes: ((nodes at: 2) at: 2) to: result members.
 	^ result

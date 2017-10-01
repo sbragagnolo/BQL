@@ -1,3 +1,3 @@
 generated-reduction actions
-reduceActionForClause2: nodes
+reduceActionForSetStatement1: nodes
 	^ nodes at: 1
