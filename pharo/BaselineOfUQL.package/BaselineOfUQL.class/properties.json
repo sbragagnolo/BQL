@@ -1,11 +1,11 @@
 {
 	"commentStamp" : "SantiagoBragagnolo 8/13/2017 22:50",
 	"super" : "BaselineOf",
-	"category" : "BaselineOfEQL",
+	"category" : "BaselineOfUQL",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "BaselineOfEQL",
+	"name" : "BaselineOfUQL",
 	"type" : "normal"
 }
