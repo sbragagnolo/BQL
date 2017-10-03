@@ -1,3 +1,0 @@
-generated
-visitIsNotNullOperation: anIsNotNullOperation
-	^ self visitRootQuery: anIsNotNullOperation

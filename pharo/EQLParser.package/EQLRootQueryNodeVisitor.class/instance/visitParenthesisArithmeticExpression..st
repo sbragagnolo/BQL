@@ -1,3 +1,0 @@
-generated
-visitParenthesisArithmeticExpression: aParenthesisArithmeticExpression
-	^ self visitRootQuery: aParenthesisArithmeticExpression

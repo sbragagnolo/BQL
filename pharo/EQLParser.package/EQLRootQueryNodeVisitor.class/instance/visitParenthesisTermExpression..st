@@ -1,3 +1,0 @@
-generated
-visitParenthesisTermExpression: aParenthesisTermExpression
-	^ self visitRootQuery: aParenthesisTermExpression

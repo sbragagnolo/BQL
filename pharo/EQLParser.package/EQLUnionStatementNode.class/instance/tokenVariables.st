@@ -1,3 +1,0 @@
-generated
-tokenVariables
-	^ #(#unionToken #semicolonToken)
