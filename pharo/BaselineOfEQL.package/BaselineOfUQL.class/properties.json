@@ -6,6 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "BaselineOfEQL",
+	"name" : "BaselineOfUQL",
 	"type" : "normal"
 }
