@@ -3,7 +3,7 @@
 mkdir build/ -p
 cd build/ 
 wget -O- get.pharo.org/60+vmT | bash
-./pharo-ui Pharo eval --save "  Metacello new baseline: 'EQL'; repository: 'github://sbragagnolo/EQL/pharo'; load. "
+./pharo-ui Pharo eval --save "  Metacello new baseline: 'UQL'; repository: 'github://sbragagnolo/UQL/pharo'; load. "
 cd .. 
 
 
