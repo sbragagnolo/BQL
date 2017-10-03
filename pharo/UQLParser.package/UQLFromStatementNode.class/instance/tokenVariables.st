@@ -1,0 +1,3 @@
+generated
+tokenVariables
+	^ #(#fromToken #semicolonToken)

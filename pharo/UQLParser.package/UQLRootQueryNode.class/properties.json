@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "SmaCCParseNode",
+	"category" : "UQLParser",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"clauses",
+		"semicolonToken"
+	],
+	"name" : "UQLRootQueryNode",
+	"type" : "normal"
+}

@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "UQLRootQueryNode",
+	"category" : "UQLParser",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"left_exp",
+		"greaterThanEqualToken",
+		"right_exp"
+	],
+	"name" : "UQLGreaterEqualsThanOperationNode",
+	"type" : "normal"
+}

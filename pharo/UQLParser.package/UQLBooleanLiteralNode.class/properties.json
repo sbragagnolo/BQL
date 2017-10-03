@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "UQLRootQueryNode",
+	"category" : "UQLParser",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"value"
+	],
+	"name" : "UQLBooleanLiteralNode",
+	"type" : "normal"
+}

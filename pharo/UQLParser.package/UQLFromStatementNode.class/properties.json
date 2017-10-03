@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "UQLRootQueryNode",
+	"category" : "UQLParser",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"fromToken",
+		"base_source",
+		"sourceses"
+	],
+	"name" : "UQLFromStatementNode",
+	"type" : "normal"
+}

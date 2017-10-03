@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "",
+	"super" : "UQLRootQueryNode",
+	"category" : "UQLParser",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"leftBraceToken",
+		"name_value_list",
+		"rightBraceToken",
+		"exp_list"
+	],
+	"name" : "UQLFunctionCallArgumentsNode",
+	"type" : "normal"
+}

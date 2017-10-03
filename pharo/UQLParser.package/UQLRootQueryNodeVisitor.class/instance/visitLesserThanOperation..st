@@ -1,0 +1,3 @@
+generated
+visitLesserThanOperation: aLesserThanOperation
+	^ self visitRootQuery: aLesserThanOperation

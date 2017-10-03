@@ -1,0 +1,17 @@
+{
+	"commentStamp" : "",
+	"super" : "UQLRootQueryNode",
+	"category" : "UQLParser",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"leftParenTokens",
+		"left_collection",
+		"rightParenTokens",
+		"minusToken",
+		"right_collection"
+	],
+	"name" : "UQLMinusStatementNode",
+	"type" : "normal"
+}

@@ -1,0 +1,3 @@
+generated
+visitDifferentThanOperation: aDifferentThanOperation
+	^ self visitRootQuery: aDifferentThanOperation
