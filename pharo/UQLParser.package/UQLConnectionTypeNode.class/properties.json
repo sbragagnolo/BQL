@@ -6,12 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"createToken",
-		"connectionToken",
-		"name",
-		"url",
-		"type"
+		"bitcashToken"
 	],
-	"name" : "UQLCreateConnectionStatementNode",
+	"name" : "UQLConnectionTypeNode",
 	"type" : "normal"
 }

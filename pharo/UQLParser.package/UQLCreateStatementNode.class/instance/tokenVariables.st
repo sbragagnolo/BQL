@@ -1,3 +1,3 @@
 generated
 tokenVariables
-	^ #(#createToken #bufferToken #leftBraceToken #rightBraceToken #semicolonToken)
+	^ #(#createToken #collectionToken #leftBraceToken #rightBraceToken #semicolonToken)

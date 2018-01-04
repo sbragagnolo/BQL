@@ -4,7 +4,7 @@ scanForTokenX1
 	(('$/' includes: currentCharacter)
 		or: [ (currentCharacter between: $A and: $Z)
 				or: [ currentCharacter == $_ or: [ currentCharacter between: $a and: $z ] ] ])
-		ifTrue: [ [ self recordMatch: #(73).
+		ifTrue: [ [ self recordMatch: #(79).
 			self step.
 			currentCharacter == $$
 				or: [ (currentCharacter between: $. and: $:)

@@ -7,16 +7,16 @@ scanForToken
 	currentCharacter == $"
 		ifTrue: [ ^ self scan1 ].
 	currentCharacter == $%
-		ifTrue: [ ^ self recordAndReportMatch: #(3) ].
+		ifTrue: [ ^ self recordAndReportMatch: #(6) ].
 	currentCharacter == $&
 		ifTrue:
 			[ ^ self scanForTokenX14 ].
 	currentCharacter == $'
 		ifTrue: [ ^ self scan3 ].
 	currentCharacter == $(
-		ifTrue: [ ^ self recordAndReportMatch: #(15) ].
+		ifTrue: [ ^ self recordAndReportMatch: #(9) ].
 	currentCharacter == $)
-		ifTrue: [ ^ self recordAndReportMatch: #(22) ].
+		ifTrue: [ ^ self recordAndReportMatch: #(25) ].
 	currentCharacter == $*
 		ifTrue:
 			[ ^ self scanForTokenX10 ].
@@ -24,7 +24,7 @@ scanForToken
 		ifTrue:
 			[ ^ self scanForTokenX9 ].
 	currentCharacter == $,
-		ifTrue: [ ^ self recordAndReportMatch: #(23) ].
+		ifTrue: [ ^ self recordAndReportMatch: #(26) ].
 	currentCharacter == $-
 		ifTrue:
 			[ ^ self scanForTokenX4 ].

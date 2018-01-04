@@ -5,7 +5,7 @@ definitionComment
 <hexnumber>: 0x[0-9a-fA-F]+ ;
 <realnumber>: <decimalnumber>? [\.] <decimalnumber> ; #  added to support real numbers (not in the grammar but apear in the contracts)	
 <booleanliteral> : true | false ;
-<reservedkeywords>:  SELECT | FROM | IN | AT |LIMIT| PORT | WHERE  | ORDER | BY |  IS | AND | OR | NOT | CONTRACTS | TRANSACTIONS | BLOCKS | TYPE | ACCOUNTS | CONTRACT | ACTIVATED-METHODS | STAMP | CREATE | BUFFER | DIRECTORY | REPOSITORY  | WEI ;
+<reservedkeywords>:  SELECT | FROM | IN | AT |LIMIT| PORT | WHERE  | ORDER | BY |  IS | AND | OR | NOT | CONTRACTS | TRANSACTIONS | BLOCKS | TYPE | ACCOUNTS | CONTRACT | ACTIVATED-METHODS | STAMP | CREATE | COLLECTION | DIRECTORY | REPOSITORY  | WEI ;
 <identifier>: [a-zA-Z_$] [a-zA-Z_$0-9]* ;
 <url>: [a-zA-Z_$] [a-zA-Z_$0-9]*[\:] [a-zA-Z_$/] [a-zA-Z_$0-9.@:/]* ;
 <whitespace>: \s+ ;
@@ -50,8 +50,11 @@ SelectStatement: ""select"" ExpressionList 'binding' FromStatement 'from' (Domai
 
 
 
-CreateStatement: ""create"" ""buffer"" IdentifierLiteral 'name' ""{"" SelectStatement 'selection' ""}"" {{}};
-CreateConnectionStatement: ""create"" ""connection"" IdentifierLiteral 'name'  UrlLiteral 'url' {{}};
+CreateStatement: ""create"" ""collection"" IdentifierLiteral 'name' ""{"" SelectStatement 'selection' ""}"" {{}};
+
+ConnectionType:  ""ethereum"" | ""mongodb""  | ""sql"" |  ""bitcoin"" | ""litecoin"" | ""bitcash"" {{}};
+
+CreateConnectionStatement: ""create""  ConnectionType 'type'   ""connection"" IdentifierLiteral 'name'  UrlLiteral 'url' {{}};
 
 SetStatement: UnionStatement | IntersectionStatement | MinusStatement;
 

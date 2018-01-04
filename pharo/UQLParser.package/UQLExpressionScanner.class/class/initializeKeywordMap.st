@@ -1,7 +1,7 @@
 generated-initialization
 initializeKeywordMap
 	keywordMap := Dictionary new.
-	#(#(76 '--' 2) #(72 'and' 24) #(72 'at' 62) #(72 'between' 50) #(72 'buffer' 33) #(72 'by' 52) #(72 'connection' 57) #(72 'create' 11) #(72 'days' 44) #(72 'delete' 7) #(72 'domain' 53) #(72 'ether' 48) #(72 'false' 71) #(72 'finney' 51) #(72 'from' 58) #(72 'hours' 47) #(72 'in' 60) #(72 'intersect' 55) #(72 'is' 37) #(72 'join' 66) #(72 'left' 64) #(72 'like' 39) #(72 'limit' 43) #(72 'minus' 59) #(72 'minutes' 46) #(72 'not' 35) #(72 'null' 38) #(72 'on' 67) #(72 'or' 18) #(72 'order' 63) #(72 'right' 61) #(72 'seconds' 49) #(72 'select' 26) #(72 'szabo' 42) #(72 'true' 71) #(72 'union' 54) #(72 'weeks' 45) #(72 'wei' 41) #(72 'where' 65) #(72 'years' 10))
+	#(#(82 '--' 3) #(78 'and' 21) #(78 'at' 73) #(78 'between' 45) #(78 'bitcash' 59) #(78 'bitcoin' 63) #(78 'by' 55) #(78 'collection' 13) #(78 'connection' 60) #(78 'create' 12) #(78 'days' 47) #(78 'delete' 4) #(78 'domain' 67) #(78 'ether' 53) #(78 'ethereum' 19) #(78 'false' 77) #(78 'finney' 52) #(78 'from' 71) #(78 'hours' 50) #(78 'in' 72) #(78 'intersect' 58) #(78 'is' 40) #(78 'join' 69) #(78 'left' 68) #(78 'like' 51) #(78 'limit' 43) #(78 'litecoin' 64) #(78 'minus' 61) #(78 'minutes' 49) #(78 'mongodb' 44) #(78 'not' 38) #(78 'null' 41) #(78 'on' 66) #(78 'or' 23) #(78 'order' 56) #(78 'right' 57) #(78 'seconds' 54) #(78 'select' 17) #(78 'sql' 62) #(78 'szabo' 46) #(78 'true' 77) #(78 'union' 65) #(78 'weeks' 48) #(78 'wei' 42) #(78 'where' 70) #(78 'years' 10))
 		do: [ :each | 
 			(keywordMap at: each first ifAbsentPut: [ Dictionary new ])
 				at: (each at: 2)
