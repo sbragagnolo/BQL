@@ -50,7 +50,7 @@ SelectStatement: ""select"" ExpressionList 'binding' FromStatement 'from' (Domai
 
 
 
-CreateStatement: ""create"" ""collection"" IdentifierLiteral 'name' ""{"" SelectStatement 'selection' ""}"" {{}};
+CreateStatement: ""create"" ""collection"" (IdentifierLiteral | MemberAccess)  'name' ""{"" SelectStatement 'selection' ""}"" {{}};
 
 ConnectionType:  ""ethereum"" | ""mongodb""  | ""sql"" |  ""bitcoin"" | ""litecoin"" | ""bitcash"" {{}};
 

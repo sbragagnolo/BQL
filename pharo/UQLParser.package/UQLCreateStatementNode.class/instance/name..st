@@ -1,7 +1,7 @@
 generated
-name: anUQLIdentifierLiteralNode
+name: anUQLRootQueryNode
 	self name notNil
 		ifTrue: [ self name parent: nil ].
-	name := anUQLIdentifierLiteralNode.
+	name := anUQLRootQueryNode.
 	self name notNil
 		ifTrue: [ self name parent: self ]
