@@ -77,7 +77,7 @@ RightJoin: ""right"" ""join"" SourceBind 'joined_source' ""on"" (BooleanOperatio
 Join: InnerJoin | LeftJoin | RightJoin;
 
 
-OrderByStatement: ""order"" ""by"" Expression 'expression' {{}};
+OrderByStatement: ""order"" ""by"" Expression 'expression'  (""asc""|""desc"") 'order'?  {{}};
 
 LimitStatement: ""limit"" <decimalnumber> 'amount' {{}};
 

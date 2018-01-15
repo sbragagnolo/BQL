@@ -8,7 +8,8 @@
 	"instvars" : [
 		"orderToken",
 		"byToken",
-		"expression"
+		"expression",
+		"order"
 	],
 	"name" : "UQLOrderByStatementNode",
 	"type" : "normal"

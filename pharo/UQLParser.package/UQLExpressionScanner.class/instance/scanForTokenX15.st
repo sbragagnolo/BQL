@@ -9,7 +9,7 @@ scanForTokenX15
 		ifTrue:
 			[ ^ self scanForTokenX6 ].
 	(currentCharacter isSafeForHTTP or: [ currentCharacter == $$ ])
-		ifTrue: [ [ self recordMatch: #(78).
+		ifTrue: [ [ self recordMatch: #(80).
 			self step.
 			currentCharacter == $:
 				ifTrue:
