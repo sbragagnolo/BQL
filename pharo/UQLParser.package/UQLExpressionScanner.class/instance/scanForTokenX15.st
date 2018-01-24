@@ -1,7 +1,7 @@
 generated
 scanForTokenX15
 	currentCharacter == $~
-		ifTrue: [ ^ self recordAndReportMatch: #(2) ].
+		ifTrue: [ ^ self recordAndReportMatch: #(1) ].
 	currentCharacter isDigit
 		ifTrue: [ ^ self scan7 ].
 	(currentCharacter isSeparator
@@ -9,7 +9,7 @@ scanForTokenX15
 		ifTrue:
 			[ ^ self scanForTokenX6 ].
 	(currentCharacter isSafeForHTTP or: [ currentCharacter == $$ ])
-		ifTrue: [ [ self recordMatch: #(80).
+		ifTrue: [ [ self recordMatch: #(82).
 			self step.
 			currentCharacter == $:
 				ifTrue:

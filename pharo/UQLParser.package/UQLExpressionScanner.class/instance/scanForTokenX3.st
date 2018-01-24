@@ -1,6 +1,6 @@
 generated
 scanForTokenX3
-	self recordMatch: #(76).
+	self recordMatch: #(78).
 	self step.
 	currentCharacter == $.
 		ifTrue: [ ^ self scan6 ].
@@ -9,7 +9,7 @@ scanForTokenX3
 			(currentCharacter isDigit
 				or: [ (currentCharacter between: $A and: $F)
 						or: [ currentCharacter between: $a and: $f ] ])
-				ifTrue: [ [ self recordMatch: #(77).
+				ifTrue: [ [ self recordMatch: #(79).
 					self step.
 					currentCharacter isDigit
 						or: [ (currentCharacter between: $A and: $F)

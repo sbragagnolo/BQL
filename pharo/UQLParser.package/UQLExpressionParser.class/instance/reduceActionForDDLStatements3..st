@@ -1,3 +1,3 @@
 generated-reduction actions
-reduceActionForSetStatement1: nodes
+reduceActionForDDLStatements3: nodes
 	^ nodes at: 1

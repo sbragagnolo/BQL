@@ -1,0 +1,3 @@
+generated
+visitDropConnectionStatement: aDropConnectionStatement
+	^ self visitRootQuery: aDropConnectionStatement
