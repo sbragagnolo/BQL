@@ -78,7 +78,7 @@ FromStatement: ""from"" SourceBind 'base_source' (Join 'sources')* {{}};
 
 SourceBind: IdentifierLiteral 'binding' ""in"" (IdentifierLiteral | MemberAccess) 'buffer_name' ( ""at"" (IdentifierLiteral | UrlLiteral ) 'database' )? {{}};
 
-WhereStatement: ""where""  (BooleanOperation | CompareOperation | MemberAccess) 'expression' {{}};
+WhereStatement: ""where""  (BooleanOperation | CompareOperation | Call  ) 'expression' {{}};
 
 InnerJoin: ""join"" SourceBind 'joined_source' ""on"" (BooleanOperation | CompareOperation) 'expression' {{}};
 LeftJoin: ""left"" ""join"" SourceBind 'joined_source' ""on"" (BooleanOperation | CompareOperation) 'expression' {{}};
@@ -93,7 +93,7 @@ LimitStatement: ""limit"" <decimalnumber> 'amount' {{}};
 
 ### Booleans! 
 	BooleanOperable: 
-		(TermExpression | BooleanOperation | CompareOperation | ParenthesisBooleanExpression | ParenthesisCompareExpression);
+		(TermExpression | BooleanOperation | CompareOperation | ParenthesisBooleanExpression | ParenthesisCompareExpression );
 
 	BooleanOperation:
 		NotOperation
@@ -110,7 +110,7 @@ LimitStatement: ""limit"" <decimalnumber> 'amount' {{}};
 
 ### Arithmetics! 
 	ArithmeticallyOperable: 
-		ArithmeticOperation | TermExpression | Measure | ParenthesisArithmeticExpression  ;
+		ArithmeticOperation | TermExpression | Measure | ParenthesisArithmeticExpression   ;
 
 	ArithmeticOperation: 
 		NegativeOperation 
