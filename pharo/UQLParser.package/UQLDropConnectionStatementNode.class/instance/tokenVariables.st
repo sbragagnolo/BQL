@@ -1,3 +1,3 @@
 generated
 tokenVariables
-	^ #(#dropToken #connectionToken #semicolonToken)
+	^ #(#dropToken #type #schemaToken #semicolonToken)

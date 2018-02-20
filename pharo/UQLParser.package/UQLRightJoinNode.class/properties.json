@@ -10,7 +10,8 @@
 		"joinToken",
 		"joined_source",
 		"onToken",
-		"expression"
+		"expression",
+		"outerToken"
 	],
 	"name" : "UQLRightJoinNode",
 	"type" : "normal"

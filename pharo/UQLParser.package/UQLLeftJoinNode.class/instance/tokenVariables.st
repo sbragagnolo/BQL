@@ -1,3 +1,3 @@
 generated
 tokenVariables
-	^ #(#leftToken #joinToken #onToken #semicolonToken)
+	^ #(#leftToken #outerToken #joinToken #onToken #semicolonToken)

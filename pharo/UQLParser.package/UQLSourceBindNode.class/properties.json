@@ -7,10 +7,10 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"binding",
-		"inToken",
 		"buffer_name",
 		"atToken",
-		"database"
+		"database",
+		"asToken"
 	],
 	"name" : "UQLSourceBindNode",
 	"type" : "normal"

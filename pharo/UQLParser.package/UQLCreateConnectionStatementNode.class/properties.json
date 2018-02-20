@@ -7,10 +7,10 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"createToken",
-		"connectionToken",
 		"name",
 		"url",
-		"type"
+		"type",
+		"schemaToken"
 	],
 	"name" : "UQLCreateConnectionStatementNode",
 	"type" : "normal"

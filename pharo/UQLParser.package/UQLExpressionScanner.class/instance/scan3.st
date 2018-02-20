@@ -2,7 +2,7 @@ generated
 scan3
 	[ self step.
 	currentCharacter == $'
-		ifTrue: [ ^ self recordAndReportMatch: #(85) ].
+		ifTrue: [ ^ self recordAndReportMatch: #(82) ].
 	(currentCharacter == Character space or: [ currentCharacter == $\ ])
 		ifTrue: [ ^ self scan4 ].
 	currentCharacter <= Character tab

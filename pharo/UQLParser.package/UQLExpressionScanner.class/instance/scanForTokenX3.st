@@ -1,20 +1,13 @@
 generated
 scanForTokenX3
-	self recordMatch: #(78).
+	self recordMatch: #(18).
 	self step.
-	currentCharacter == $.
-		ifTrue: [ ^ self scan6 ].
-	currentCharacter == $x
-		ifTrue: [ self step.
-			(currentCharacter isDigit
-				or: [ (currentCharacter between: $A and: $F)
-						or: [ currentCharacter between: $a and: $f ] ])
-				ifTrue: [ [ self recordMatch: #(79).
-					self step.
-					currentCharacter isDigit
-						or: [ (currentCharacter between: $A and: $F)
-								or: [ currentCharacter between: $a and: $f ] ] ] whileTrue ].
-			^ self reportLastMatch ].
-	currentCharacter isDigit
-		ifTrue: [ ^ self scan7 ].
+	currentCharacter == $*
+		ifTrue: [ ^ self scan5 ].
+	currentCharacter == $/
+		ifTrue: [ [ self recordMatch: #(83).
+			self step.
+			currentCharacter <= Character tab
+				or: [ (currentCharacter between: Character pageUp and: Character newPage)
+						or: [ currentCharacter >= (Character value: 14) ] ] ] whileTrue ].
 	^ self reportLastMatch

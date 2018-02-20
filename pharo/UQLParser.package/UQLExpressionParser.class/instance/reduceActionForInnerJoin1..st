@@ -2,8 +2,9 @@ generated-reduction actions
 reduceActionForInnerJoin1: nodes
 	| result |
 	result := UQLInnerJoinNode new.
-	result joinToken: (nodes at: 1).
-	result joined_source: (nodes at: 2).
-	result onToken: (nodes at: 3).
-	result expression: (nodes at: 4).
+	result innerToken: (nodes at: 1).
+	result joinToken: (nodes at: 2).
+	result joined_source: (nodes at: 3).
+	result onToken: (nodes at: 4).
+	result expression: (nodes at: 5).
 	^ result

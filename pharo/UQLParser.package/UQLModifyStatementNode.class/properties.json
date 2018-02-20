@@ -6,12 +6,12 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"modifyToken",
 		"collectionToken",
 		"name",
 		"leftBraceToken",
 		"selection",
-		"rightBraceToken"
+		"rightBraceToken",
+		"alterToken"
 	],
 	"name" : "UQLModifyStatementNode",
 	"type" : "normal"

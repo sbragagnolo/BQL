@@ -1,3 +1,3 @@
 generated
-type: anObject
-	type := anObject
+type: aSmaCCToken
+	type := aSmaCCToken

@@ -9,7 +9,8 @@
 		"joinToken",
 		"joined_source",
 		"onToken",
-		"expression"
+		"expression",
+		"innerToken"
 	],
 	"name" : "UQLInnerJoinNode",
 	"type" : "normal"

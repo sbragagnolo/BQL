@@ -8,8 +8,8 @@
 	"instvars" : [
 		"dropToken",
 		"type",
-		"connectionToken",
-		"name"
+		"name",
+		"schemaToken"
 	],
 	"name" : "UQLDropConnectionStatementNode",
 	"type" : "normal"

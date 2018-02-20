@@ -1,3 +1,3 @@
 generated
 tokenVariables
-	^ #(#createToken #connectionToken #semicolonToken)
+	^ #(#createToken #type #schemaToken #semicolonToken)
