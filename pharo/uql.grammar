@@ -21,6 +21,7 @@
 %annotate_tokens;
 %prefix UQL;
 %suffix Node;
+%ignorecase;
 %left ")"  ;
 #expression operators -- lowest precedence are first.
 %left ",";
@@ -47,13 +48,13 @@ Clause : QueryStatements | DDLStatements ;
 DDLStatements: CreateStatement | ModifyStatement | DropStatement | CreateConnectionStatement | DropConnectionStatement;
 
 CreateStatement: "create" "collection" (IdentifierLiteral | MemberAccess)  'name' "{" SelectStatement 'selection' "}" {{}};
-ModifyStatement: "modify" "collection" (IdentifierLiteral | MemberAccess)  'name' "{" SelectStatement 'selection' "}" {{}};
+ModifyStatement: "alter" "collection" (IdentifierLiteral | MemberAccess)  'name' "{" SelectStatement 'selection' "}" {{}};
 DropStatement: "drop" "collection" (IdentifierLiteral | MemberAccess)  'name' {{}};
 
-ConnectionType:  "ethereum" | "mongodb"  | "sql" |  "bitcoin" | "litecoin" | "bitcash" {{}};
+#ConnectionType:  "ethereum" | "mongodb"  | "sql" |  "bitcoin" | "litecoin" | "bitcash" {{}};
 
-CreateConnectionStatement: "create"  ConnectionType 'type'   "connection" IdentifierLiteral 'name'  UrlLiteral 'url' {{}};
-DropConnectionStatement: "drop"  ConnectionType 'type'   "connection" IdentifierLiteral 'name' {{}};
+CreateConnectionStatement: "create"  <identifier> 'type'   "schema" IdentifierLiteral 'name'  UrlLiteral 'url' {{}};
+DropConnectionStatement: "drop"  <identifier> 'type'   "schema" IdentifierLiteral 'name' {{}};
 
 
 QueryStatements: SelectStatement | SetStatement;
@@ -74,13 +75,13 @@ DomainStatement: "domain" UrlLiteral 'url' {{}};
 
 FromStatement: "from" SourceBind 'base_source' (Join 'sources')* {{}};
 
-SourceBind: IdentifierLiteral 'binding' "in" (IdentifierLiteral | MemberAccess) 'buffer_name' ( "at" (IdentifierLiteral | UrlLiteral ) 'database' )? {{}};
+SourceBind: (IdentifierLiteral | MemberAccess) 'buffer_name' "as" IdentifierLiteral 'binding'  ( "at" (IdentifierLiteral | UrlLiteral ) 'database' )? {{}};
 
 WhereStatement: "where"  (BooleanOperation | CompareOperation | Call  ) 'expression' {{}};
 
-InnerJoin: "join" SourceBind 'joined_source' "on" (BooleanOperation | CompareOperation) 'expression' {{}};
-LeftJoin: "left" "join" SourceBind 'joined_source' "on" (BooleanOperation | CompareOperation) 'expression' {{}};
-RightJoin: "right" "join" SourceBind 'joined_source' "on" (BooleanOperation | CompareOperation) 'expression' {{}};
+InnerJoin: "inner"? "join" SourceBind 'joined_source' "on" (BooleanOperation | CompareOperation) 'expression' {{}};
+LeftJoin: "left" "outer"? "join" SourceBind 'joined_source' "on" (BooleanOperation | CompareOperation) 'expression' {{}};
+RightJoin: "right" "outer"? "join" SourceBind 'joined_source' "on" (BooleanOperation | CompareOperation) 'expression' {{}};
 Join: InnerJoin | LeftJoin | RightJoin;
 
 
