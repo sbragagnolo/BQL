@@ -1,5 +1,5 @@
 generated-reduction actions
-reduceActionFor________Expression____1: nodes
+reduceActionFor________Expression__exp_____1: nodes
 	| result |
 	result := Array new: 2.
 	result at: 1 put: (OrderedCollection new: 2).

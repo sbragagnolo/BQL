@@ -1,5 +1,5 @@
 generated-reduction actions
-reduceActionFor______IdentifierLiteral_____Expression_1: nodes
+reduceActionFor______IdentifierLiteral__id______Expression__exp__1: nodes
 	| result |
 	result := Array new: 4.
 	result at: 1 put: (nodes at: 1).

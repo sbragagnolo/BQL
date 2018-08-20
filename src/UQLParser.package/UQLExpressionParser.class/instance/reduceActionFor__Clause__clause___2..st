@@ -1,5 +1,5 @@
 generated-reduction actions
-reduceActionFor__Clause__2: nodes
+reduceActionFor__Clause__clause___2: nodes
 	| result |
 	result := nodes at: 1.
 	self add: (nodes at: 2) to: result.

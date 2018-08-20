@@ -1,14 +1,19 @@
 generated
 scanForTokenX1
+	self recordMatch: #(75).
 	self step.
-	(('$/' includes: currentCharacter)
-		or: [ (currentCharacter between: $A and: $Z)
-				or: [ currentCharacter == $_ or: [ currentCharacter between: $a and: $z ] ] ])
-		ifTrue: [ [ self recordMatch: #(80).
-			self step.
-			currentCharacter == $$
-				or: [ (currentCharacter between: $. and: $:)
-						or: [ (currentCharacter between: $@ and: $Z)
-								or: [ currentCharacter == $_ or: [ currentCharacter between: $a and: $z ] ] ] ] ]
-				whileTrue ].
+	currentCharacter == $.
+		ifTrue: [ ^ self scan6 ].
+	(currentCharacter between: $0 and: $9)
+		ifTrue: [ ^ self scan7 ].
+	('Xx' includes: currentCharacter)
+		ifTrue: [ self step.
+			((currentCharacter between: $0 and: $9)
+				or: [ (currentCharacter between: $A and: $F)
+						or: [ currentCharacter between: $a and: $f ] ])
+				ifTrue: [ [ self recordMatch: #(76).
+					self step.
+					(currentCharacter between: $0 and: $9)
+						or: [ (currentCharacter between: $A and: $F)
+								or: [ currentCharacter between: $a and: $f ] ] ] whileTrue ] ].
 	^ self reportLastMatch

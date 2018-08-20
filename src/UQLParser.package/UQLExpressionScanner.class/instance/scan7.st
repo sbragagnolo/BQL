@@ -4,5 +4,5 @@ scan7
 	self step.
 	currentCharacter == $.
 		ifTrue: [ ^ self scan6 ].
-	currentCharacter isDigit ] whileTrue.
+	currentCharacter between: $0 and: $9 ] whileTrue.
 	^ self reportLastMatch

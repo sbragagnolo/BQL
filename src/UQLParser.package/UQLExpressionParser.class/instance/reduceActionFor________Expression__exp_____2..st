@@ -1,5 +1,5 @@
 generated-reduction actions
-reduceActionFor________Expression____2: nodes
+reduceActionFor________Expression__exp_____2: nodes
 	| result |
 	result := nodes at: 1.
 	self add: ((nodes at: 2) at: 1) to: (result at: 1).

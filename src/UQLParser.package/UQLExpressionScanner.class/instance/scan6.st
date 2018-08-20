@@ -1,8 +1,8 @@
 generated
 scan6
 	self step.
-	currentCharacter isDigit
+	(currentCharacter between: $0 and: $9)
 		ifTrue: [ [ self recordMatch: #(77).
 			self step.
-			currentCharacter isDigit ] whileTrue ].
+			currentCharacter between: $0 and: $9 ] whileTrue ].
 	^ self reportLastMatch

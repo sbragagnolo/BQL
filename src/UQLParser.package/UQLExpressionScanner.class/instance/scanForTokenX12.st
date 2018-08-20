@@ -1,9 +1,7 @@
 generated
 scanForTokenX12
-	self recordMatch: #(15).
+	self recordMatch: #(1).
 	self step.
-	currentCharacter isDigit
-		ifTrue: [ [ self recordMatch: #(77).
-			self step.
-			currentCharacter isDigit ] whileTrue ].
+	currentCharacter == $=
+		ifTrue: [ ^ self recordAndReportMatch: #(28) ].
 	^ self reportLastMatch
