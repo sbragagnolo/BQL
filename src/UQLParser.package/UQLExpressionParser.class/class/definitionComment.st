@@ -47,7 +47,7 @@ Clause : QueryStatements | DDLStatements ;
 
 
 
-DDLStatements: CreateStatement | ModifyStatement | DropStatement | CreateConnectionStatement | DropConnectionStatement;
+DDLStatements: CreateStatement | ModifyStatement | DropStatement | CreateConnectionStatement | DropConnectionStatement | CreateIndexStatement | DropIndexStatement;
 
 CreateStatement: ""create"" ""collection"" (IdentifierLiteral | MemberAccess)  'name' ""{"" SelectStatement 'selection' ""}"" {{}};
 ModifyStatement: ""alter"" ""collection"" (IdentifierLiteral | MemberAccess)  'name' ""{"" SelectStatement 'selection' ""}"" {{}};
@@ -55,8 +55,17 @@ DropStatement: ""drop"" ""collection"" (IdentifierLiteral | MemberAccess)  'name
 
 #ConnectionType:  ""ethereum"" | ""mongodb""  | ""sql"" |  ""bitcoin"" | ""litecoin"" | ""bitcash"" {{}};
 
-CreateConnectionStatement: ""create""  <identifier> 'type'   ""schema"" IdentifierLiteral 'name'  UrlLiteral 'url' {{}};
+CreateConnectionStatement: ""create""  <identifier> 'type'""schema"" IdentifierLiteral 'name'  UrlLiteral 'url' {{}};
 DropConnectionStatement: ""drop""  <identifier> 'type'   ""schema"" IdentifierLiteral 'name' {{}};
+
+
+#CREATE UNIQUE INDEX name ON collection.id (member); 
+#CREATE INDEX name ON collection.id (member); 
+
+
+CreateIndexStatement: ""create"" (<identifier> 'type')? ""index"" IdentifierLiteral 'name' ""on"" (IdentifierLiteral | MemberAccess) 'collection' ""("" IdentifierLiteral 'member' "")""  {{}};
+DropIndexStatement: ""drop"" ""index""  IdentifierLiteral 'name' {{}};
+
 
 
 QueryStatements: SelectStatement | SetStatement;
