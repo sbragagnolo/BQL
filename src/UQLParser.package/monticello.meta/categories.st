@@ -1,2 +1,2 @@
 SystemOrganization addCategory: #UQLParser!
-SystemOrganization addCategory: #'UQLParser-scanner-parser'!
+SystemOrganization addCategory: 'UQLParser-scanner-parser'!
