@@ -1,3 +1,0 @@
-generated
-visitCreateRelationIndexStatement: aCreateRelationIndexStatement
-	^ self visitRootQuery: aCreateRelationIndexStatement
