@@ -65,7 +65,7 @@ DropConnectionStatement: ""drop""  <identifier> 'type'   ""schema"" IdentifierLi
 
 CreateIndexStatement: ""create"" (<identifier> 'type')? ""index"" (IdentifierLiteral | MemberAccess) 'name' ""on"" (IdentifierLiteral | MemberAccess) 'collection' ""("" (IdentifierLiteral | MemberAccess)  'member' "")""  {{}};
 CreateMappedIndexStatement: ""create""  (<identifier> 'type')?  ""index"" (IdentifierLiteral | MemberAccess) 'name'  ""on"" (IdentifierLiteral | MemberAccess) 'targetedCollection' ""("" (IdentifierLiteral | MemberAccess)  'targetedMember' "")"" ""mapped"" ""to"" (IdentifierLiteral | MemberAccess) 'mappedCollection' ""("" (IdentifierLiteral | MemberAccess)  'mappedCollectionMember' "")""   {{}};
-DropIndexStatement: ""drop"" ""index""  IdentifierLiteral 'name' {{}};
+DropIndexStatement: ""drop"" ""index""   (IdentifierLiteral | MemberAccess)  'name' {{}};
 
 
 
