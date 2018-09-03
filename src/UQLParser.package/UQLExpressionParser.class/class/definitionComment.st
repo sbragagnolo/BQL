@@ -47,7 +47,7 @@ Clause : QueryStatements | DDLStatements ;
 
 
 
-DDLStatements: CreateStatement | ModifyStatement | DropStatement | CreateConnectionStatement | DropConnectionStatement | CreateIndexStatement | DropIndexStatement;
+DDLStatements: CreateStatement | ModifyStatement | DropStatement | CreateConnectionStatement | DropConnectionStatement | CreateIndexStatement | CreateRelationIndexStatement | DropIndexStatement;
 
 CreateStatement: ""create"" ""collection"" (IdentifierLiteral | MemberAccess)  'name' ""{"" SelectStatement 'selection' ""}"" {{}};
 ModifyStatement: ""alter"" ""collection"" (IdentifierLiteral | MemberAccess)  'name' ""{"" SelectStatement 'selection' ""}"" {{}};
@@ -61,9 +61,10 @@ DropConnectionStatement: ""drop""  <identifier> 'type'   ""schema"" IdentifierLi
 
 #CREATE UNIQUE INDEX name ON collection.id (member); 
 #CREATE INDEX name ON collection.id (member); 
+#CREATE INDEX name ON collection.id (member) mapped to env.col(someExistingIndexedVar);  
 
-
-CreateIndexStatement: ""create"" (<identifier> 'type')? ""index"" IdentifierLiteral 'name' ""on"" (IdentifierLiteral | MemberAccess) 'collection' ""("" IdentifierLiteral 'member' "")""  {{}};
+CreateIndexStatement: ""create"" (<identifier> 'type')? ""index"" (IdentifierLiteral | MemberAccess) 'name' ""on"" (IdentifierLiteral | MemberAccess) 'collection' ""("" (IdentifierLiteral | MemberAccess)  'member' "")""  {{}};
+CreateRelationIndexStatement: ""create""  (<identifier> 'type')?  ""index"" (IdentifierLiteral | MemberAccess) 'name'  ""on"" (IdentifierLiteral | MemberAccess) 'targetedCollection' ""("" (IdentifierLiteral | MemberAccess)  'targetedMember' "")"" ""mapped"" ""to"" (IdentifierLiteral | MemberAccess) 'mappedCollection' ""("" (IdentifierLiteral | MemberAccess)  'mappedCollectionMember' "")""   {{}};
 DropIndexStatement: ""drop"" ""index""  IdentifierLiteral 'name' {{}};
 
 
