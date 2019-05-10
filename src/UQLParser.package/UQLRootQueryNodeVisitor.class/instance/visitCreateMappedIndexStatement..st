@@ -1,0 +1,3 @@
+generated
+visitCreateMappedIndexStatement: aCreateMappedIndexStatement
+	^ self visitRootQuery: aCreateMappedIndexStatement

@@ -1,0 +1,3 @@
+generated
+mappedCollectionMember
+	^ mappedCollectionMember
